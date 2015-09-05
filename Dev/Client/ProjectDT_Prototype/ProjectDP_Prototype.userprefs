@@ -1,0 +1,23 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Unit\UnitBase.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Unit\UnitStat.cs" Line="44" Column="31" />
+      <File FileName="Assets\Scripts\Unit\UnitState\UnitState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\IdleState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Etc\R.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\MoveState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Manager\GameManager.cs" Line="309" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitBase.cs" Line="38" Column="2" />
+      <File FileName="Assets\Scripts\Unit\UnitState\AttackState.cs" Line="54" Column="8" />
+      <File FileName="Assets\Scripts\Unit\UnitState\DamagedState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\DeadState.cs" Line="21" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\park\Desktop\Share\ProjectDP_Prototype\Assets\Scripts\Unit\UnitBase.cs" line="29" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
