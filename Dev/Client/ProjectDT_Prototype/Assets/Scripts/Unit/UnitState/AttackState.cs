@@ -27,6 +27,11 @@ public class AttackState : UnitState{
             return;
         }
 
+        //. 타겟이 죽었어도 다시 무브상태로
+        UnitBase targetUnit = GameManager.Instance.FindUnit(mTargetUnitInfo);
+        if (targetUnit == null || targetUnit.IsDead())
+            mParent.ChangeState(eUnitState.Move);
+        
         mAnimator.speed *= mParent.mStat.mAttackSpeed;
         mAnimator.SetTrigger("attack");
         mParent.StopMove();
@@ -58,7 +63,7 @@ public class AttackState : UnitState{
         UnitBase targetUnit = GameManager.Instance.FindUnit(mTargetUnitInfo);
         
         //. 타겟이 죽었으면 다시 Move
-        if (targetUnit == null || targetUnit.mState.GetCode() == eUnitState.Dead)
+        if (targetUnit == null || targetUnit.IsDead())
             mParent.ChangeState(eUnitState.Move);
 
         //. 대상 유닛 공격

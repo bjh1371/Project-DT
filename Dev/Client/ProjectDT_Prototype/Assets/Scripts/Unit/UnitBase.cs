@@ -171,4 +171,9 @@ public class UnitBase : MonoBehaviour {
     {
         mRigidBody.velocity = Vector2.zero;
     }
+
+    public bool IsDead()
+    {
+        return mState.GetCode() == eUnitState.Dead;
+    }
 }

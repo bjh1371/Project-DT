@@ -31,7 +31,7 @@ public class MoveState : UnitState {
 
         //. 적이 있는지 검사
         UnitBase attackTarget = GameManager.Instance.FindAttackTarget(mParent);
-        if( attackTarget != null)
+        if( attackTarget != null && attackTarget.IsDead() == false)
         {
             //. 공격 상태로 변경
             UnitFindInfo findInfo = new UnitFindInfo();
