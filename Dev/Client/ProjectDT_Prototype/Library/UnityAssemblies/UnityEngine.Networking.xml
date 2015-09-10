@@ -74,6 +74,11 @@
         <para>Return true when a client connection has been set as ready.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Networking.ClientScene.readyConnection">
+      <summary>
+        <para>The NetworkConnection object that is currently "ready". This is the connection being used connect to the server where objects are spawned from.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Networking.ClientScene.spawnableObjects">
       <summary>
         <para>This is dictionary of the disabled NetworkIdentity objects in the scene that could be spawned by messages from the server.</para>
@@ -940,6 +945,11 @@ The message ID determines the handler that will be called on the server for this
         <para>Flag that tells if the connection has been marked as "ready" by a client calling NetworkClient.Ready().</para>
       </summary>
     </member>
+    <member name="F:UnityEngine.Networking.NetworkConnection.lastMessageTime">
+      <summary>
+        <para>The last time that a message was received on this connection.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Networking.NetworkConnection.playerControllers">
       <summary>
         <para>The list of players for this connection.</para>
@@ -1651,6 +1661,14 @@ The message ID determines the handler that will be called on the server for this
       </summary>
       <returns>
         <para>Returns the transform to spawn a player at, or null.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Networking.NetworkManager.IsClientConnected">
+      <summary>
+        <para>This checks if the NetworkManager has a client and that it is connected to a server.</para>
+      </summary>
+      <returns>
+        <para>True if the NetworkManagers client is connected to a server.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.Networking.NetworkManager.OnClientConnect(UnityEngine.Networking.NetworkConnection)">
@@ -2658,6 +2676,12 @@ The message ID determines the handler that will be called on the server for this
         <para>Unregisters a handler for a particular message type.</para>
       </summary>
       <param name="msgType">The message type to remove the handler for.</param>
+    </member>
+    <member name="M:UnityEngine.Networking.NetworkServer.UnSpawn(UnityEngine.GameObject)">
+      <summary>
+        <para>This takes an object that has been spawned and un-spawns it.</para>
+      </summary>
+      <param name="obj">The spawned object to be unspawned.</param>
     </member>
     <member name="T:UnityEngine.Networking.NetworkSettingsAttribute">
       <summary>
