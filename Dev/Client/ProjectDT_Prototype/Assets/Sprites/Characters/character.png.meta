@@ -1,0 +1,139 @@
+fileFormatVersion: 2
+guid: 535b1fca4e2ff422098e429d053e52cc
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: character_0
+    21300002: character_1
+    21300004: character_2
+    21300006: character_3
+    21300008: character_4
+    21300010: character_5
+    21300012: character_6
+    21300014: character_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 1024
+    textureFormat: -2
+    compressionQuality: 50
+  spriteSheet:
+    sprites:
+    - name: character_0
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 158
+        width: 83
+        height: 81
+      alignment: 9
+      pivot: {x: .515889704, y: .0766693875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 221
+        width: 43
+        height: 53
+      alignment: 9
+      pivot: {x: .760881662, y: .822088838}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_2
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 225
+        width: 38
+        height: 43
+      alignment: 9
+      pivot: {x: .140616566, y: .77222389}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_3
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 89
+        width: 66
+        height: 65
+      alignment: 9
+      pivot: {x: .673180759, y: .865216792}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_4
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 150
+        width: 41
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 78
+        width: 38
+        height: 50
+      alignment: 9
+      pivot: {x: .716461957, y: .872891366}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_6
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 107
+        width: 45
+        height: 39
+      alignment: 9
+      pivot: {x: .23190783, y: .893701434}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 33
+        width: 51
+        height: 32
+      alignment: 9
+      pivot: {x: .104076609, y: .499999762}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
