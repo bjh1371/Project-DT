@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Packet">
+      <UniqueIdentifier>{49260dd4-856c-46af-bfbf-59f0c756ead9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShardPacket">
+      <UniqueIdentifier>{bc14a337-3c21-4147-b7b3-af49671e2e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerPacket">
+      <UniqueIdentifier>{b00f6121-7dcf-45a7-ac6f-95374482a741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Define">
+      <UniqueIdentifier>{1c77842d-bcb5-46f5-9833-50bf9a0a9ea3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PacketBase.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedPacket.h">
+      <Filter>ShardPacket</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedStruct.h">
+      <Filter>ShardPacket</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerStruct.h">
+      <Filter>ServerPacket</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerPacket.h">
+      <Filter>ServerPacket</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorDef.h">
+      <Filter>Define</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerDef.h">
+      <Filter>Define</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedDef.h">
+      <Filter>Define</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketElement.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{94c287ab-f701-48f7-be9d-bda975d0fa9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Don%27t Care">
+      <UniqueIdentifier>{45ebc439-2d74-47c4-8671-59f517572922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SharedPacketHandler">
+      <UniqueIdentifier>{a21b215f-b367-42e0-a66d-a5690a28ee03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PacketHandlerSetup">
+      <UniqueIdentifier>{3e745e20-1ee2-4b31-b29f-b4f369428e05}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EchoServerPCH.cpp">
+      <Filter>!Don%27t Care</Filter>
+    </ClCompile>
+    <ClCompile Include="EchoServer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="EchoClient.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="EchoClientListener.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedPacketHandlerSetup.cpp">
+      <Filter>PacketHandlerSetup</Filter>
+    </ClCompile>
+    <ClCompile Include="EchoServerMain.cpp" />
+    <ClCompile Include="ESPKTEchoHandler.cpp">
+      <Filter>SharedPacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="ESPKTEchoHandler.cpp">
+      <Filter>SharedPacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="EchoPacketMarshaller.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EchoServerPCH.h">
+      <Filter>!Don%27t Care</Filter>
+    </ClInclude>
+    <ClInclude Include="EchoServer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="EchoClient.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="EchoClientListener.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedPacketHandlerSetup.h">
+      <Filter>PacketHandlerSetup</Filter>
+    </ClInclude>
+    <ClInclude Include="ESPKTEchoHandler.h">
+      <Filter>SharedPacketHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="EchoPacketMarshaller.h">
+      <Filter>System</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

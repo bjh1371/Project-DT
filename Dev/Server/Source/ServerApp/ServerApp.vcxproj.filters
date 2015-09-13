@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="!Don%27t Care">
+      <UniqueIdentifier>{a558d993-d1f5-4756-ade5-fcce17a9042b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerApp">
+      <UniqueIdentifier>{11c946f9-5eed-4ab6-825d-46222e647c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{f186510d-664f-489c-9810-1fb45d042156}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ServerAppPCH.h">
+      <Filter>!Don%27t Care</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerForm.h">
+      <Filter>ServerApp</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerApp.h">
+      <Filter>ServerApp</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncPlayer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ServerAppPCH.cpp">
+      <Filter>!Don%27t Care</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerForm.cpp">
+      <Filter>ServerApp</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerApp.cpp">
+      <Filter>ServerApp</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncPlayer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

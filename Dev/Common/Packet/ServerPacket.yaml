@@ -1,0 +1,151 @@
+Option:
+    Output: ".\\ServerPacket.h"
+    Include: ["PacketBase.h", "ServerStruct.h"]
+    Receiver:
+        Login: ["..\\XLoginServer", "LS"]
+        Entry: ["..\\XEntryServer", "ES"]
+        Game:  ["..\\XGameServer", "GS"]
+        Query: ["..\\XQueryServer", "QS"]
+        World: ["..\\XWorldServer", "WS"]
+
+Packet:
+  - Name: ISPAuthkey
+    Members:
+      - AccountNumber_t m_AccountNumber ///< 계정 번호
+      - PCNumber_t      m_PCNumber;     ///< PC 시리얼 넘버
+      - Authkey_t       m_Authkey       ///< 인증키
+    Receiver: ["Entry", "Game", "World"]
+    Comment: 인증
+
+  - Name: ISPLoginQuery
+    Members:
+      - CString<MAX_ACCOUNT_LEN>  m_Name;     ///< ID
+      - CString<MAX_PASSWORD_LEN> m_Password; ///< PASSWORD
+    Receiver: ["Query"]
+    Comment: 로그인 쿼리
+
+  - Name: ISPLoginResult
+    Members:
+      - CString<MAX_ACCOUNT_LEN> m_Name;          ///< ID
+      - AccountNumber_t          m_AccountNumber; ///< 계정 번호
+      - PacketResult             m_Result;        ///< 로그인 결과
+    Receiver: ["Login"]
+    Comment: 로그인 결과
+
+  - Name: ISPPCListQuery
+    Members:
+      - AccountNumber_t m_AccountNumber; ///< 계정번호
+    Receiver: ["Query"]
+    Comment: PC 리스트 쿼리
+
+  - Name: ISPPCListResult
+    Members:
+      - CPCEntryList    m_PCEntryList;   ///< PC 리스트 정보
+      - AccountNumber_t m_AccountNumber; ///< 계정 시리얼 넘버
+    Receiver: ["Entry"]
+    Comment: PC 리스트 결과
+
+  - Name: ISPPCCreateQuery
+    Members:
+      - AccountNumber_t          m_AccountNumber; ///< 계정 번호
+      - CString<MAX_PC_NAME_LEN> m_PCName;        ///< PC 이름
+      - PCSlot_t                 m_PCSlot;        ///< 추가할 슬랏
+    Receiver: ["Query"]
+    Comment: PC 생성 쿼리
+
+  - Name: ISPPCCreateResult
+    Members:
+      - AccountNumber_t m_AccountNumber; ///< 계정번호
+      - CPCEntryInfo    m_PCEntryInfo;   ///< 추가된 엔트리 정보
+      - PacketResult    m_Result;        ///< PC 생성 결과
+    Receiver: ["Entry"]
+    Comment: PC 생성 결과
+
+  - Name: ISPPCDeleteQuery
+    Members:
+      - AccountNumber_t m_AccountNumber; ///< 계정번호
+      - PCNumber_t      m_PCNumber;      ///< PC 시리얼번호
+    Receiver: ["Query"]
+    Comment: PC 삭제 쿼리
+
+  - Name: ISPPCDeleteQueryResult
+    Members:
+      - AccountNumber_t m_AccountNumber; ///< 계정번호
+      - PCNumber_t      m_PCNumber;      ///< 삭제된 PC넘버
+      - PacketResult    m_Result;        ///< PC 삭제 결과
+    Receiver: ["Entry"]
+    Comment: PC 삭제 결과
+
+  - Name: ISPPCLoadQuery
+    Members:
+      - AccountNumber_t m_AccountNumber; ///< 계정번호
+      - PCNumber_t      m_PCNumber;      ///< 로드할 PC
+    Receiver: ["Query"]
+    Comment: PC 로드 쿼리
+
+  - Name: ISPPCLoadQueryResult
+    Members:
+      - PCNumber_t               m_PCNumber;      ///< PC 넘버
+      - CString<MAX_PC_NAME_LEN> m_PCName;        ///< PC 이름
+      - Level_t                  m_Level;         ///< 레벨
+      - CPosition                m_Pos;           ///< 위치
+      - Money_t                  m_Money;         ///< 소지금
+      - AccountNumber_t          m_AccountNumber; ///< 계정 번호
+      - PacketResult             m_Result;        ///< 로드 결과
+    Receiver: ["Game"]
+    Comment: PC 로드 결과
+
+  - Name: ISPPCUpdateQuery
+    Members:
+      - PCNumber_t m_Number; ///< PC 넘버
+      - Level_t    m_Level;  ///< PC 레벨
+      - Money_t    m_Money;  ///< PC 소지금
+      - CPosition  m_Pos;    ///< 위치
+    Receiver: ["Query"]
+    Comment: PC 업데이트 쿼리
+
+  - Name : ISPPCEnter
+    Members:
+      - CWorldPCData m_WorldPCData;
+    Receiver: ["World"]
+    Comment: World에 입장한 PC
+
+  - Name: ISPPCLeave
+    Members:
+      - PCNumber_t m_PCNumber; ///< PC 넘버
+    Receiver: ["World", "Query"]
+    Comment: PC 나감
+
+  - Name: ISPPartyInfo
+    Members:
+      - PartyId_t     m_PartyId;      ///< 파티 ID
+      - PartyLootType m_LootType;     ///< 파티 루트 타입
+      - PCNumber_t    m_LeaderNumber; ///< 파티 장 넘버
+    Receiver: ["Game"]
+    Comment: 파티 정보 보냄
+
+  - Name: ISPPartyRemove
+    Members:
+      - PartyId_t m_PartyId; ///< 파티 ID
+    Receiver: ["Game"]
+    Comment: 파티 정보 삭제
+
+  - Name: ISPPartyJoinNotify
+    Members:
+      - PartyId_t  m_PartyId;  ///< 파티 ID
+      - PCNumber_t m_PCNumber; ///< PC 넘버
+    Receiver: ["Game"]
+    Comment: 파티 참가 알림
+
+  - Name: ISPPartyLeaveNotify
+    Members:
+      - PartyId_t  m_PartyId;  ///< 파티 ID
+      - PCNumber_t m_PCNumber; ///< PC 넘버
+    Receiver: ["Game"]
+    Comment: 파티 나감 알림
+
+  - Name: ISPPCRenew
+    Members:
+      - CWorldPCData m_WorldPCData;
+    Receiver: ["World"]
+    Comment: World에 존재하는 PC 갱신

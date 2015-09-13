@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="!Don%27t Care">
+      <UniqueIdentifier>{3f105055-d78c-4683-8955-397fec8629c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PacketProc">
+      <UniqueIdentifier>{0bffe633-651d-4cd5-ba48-f64c8cf25e1d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PacketProcPCH.h">
+      <Filter>!Don%27t Care</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketMarshaller.h">
+      <Filter>PacketProc</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketHandler.h">
+      <Filter>PacketProc</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketManager.h">
+      <Filter>PacketProc</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketBuffer.h">
+      <Filter>PacketProc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PacketProcPCH.cpp">
+      <Filter>!Don%27t Care</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketMarshaller.cpp">
+      <Filter>PacketProc</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketHandler.cpp">
+      <Filter>PacketProc</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketManager.cpp">
+      <Filter>PacketProc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,51 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file CAsyncEventSink.h
+/// \author 
+/// \date 2014.11.5
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include "RefCountable.h"
+
+class CAsyncTimerEvent;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \class CAsyncEventSink
+/// \brief 타이머 이벤트를 받을수있는 Base객체
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class CAsyncEventSink : public CRefCountable
+{
+private:
+	std::atomic<bool> m_PendingDeletion; ///< 삭제 대기중인가?
+
+
+public:
+	/// \brief 생성자
+	CAsyncEventSink();
+
+	/// \brief 소멸자
+	virtual ~CAsyncEventSink();
+
+
+public:
+	/// \brief 삭제 예정
+	bool ExChangePendingDeletion(bool value) { return m_PendingDeletion.exchange(value); }
+
+	/// \brief 삭제 대기중인가?
+	bool IsPendingDeletion() { return m_PendingDeletion; }
+
+	/// \brief 객체 삭제
+	void Destroy();
+
+
+public:
+	/// \brief Timer시 호출되는 함수
+	virtual void OnTimer(CAsyncTimerEvent* evt);
+
+
+private:
+	/// \brief 실제 객체 삭제
+	virtual void DestroyInternal();
+};

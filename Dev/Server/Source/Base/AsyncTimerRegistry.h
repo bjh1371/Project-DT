@@ -1,0 +1,50 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file TimerRegistry.h
+/// \author 
+/// \date 2014.11.4
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+class CAsyncTimerEvent;
+class CAsyncEventSink;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \class CTimerRegistry
+/// \brief 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class CAsyncTimerRegistry
+{
+	friend class CAsyncTimerEvent;
+
+private:
+	class CShortTimer;
+	class CLongTimer;
+
+	CShortTimer*  m_ShortTimer; ///< 짧은시간
+	CLongTimer*   m_LongTimer;  ///< 긴시간
+	
+
+public:
+	/// \brief 생성자
+	CAsyncTimerRegistry();
+
+	/// \brief 소멸자
+	~CAsyncTimerRegistry();
+
+
+public:
+	/// \brief 폴링 함수
+	void Hearbeat();
+
+	/// \brief 타이머를 추가한다.
+	CAsyncTimerEvent* AddTimer(CAsyncEventSink* sink, Milli_t interval, Milli_t expiration);
+
+
+private:
+	/// \brief 타이머 이벤트를 추가한다.
+	void Add(CAsyncTimerEvent* evt);
+};
+
+extern CAsyncTimerRegistry* g_AsyncTimerRegistry;

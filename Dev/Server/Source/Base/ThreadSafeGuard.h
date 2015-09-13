@@ -1,0 +1,42 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file ThreadSafeGuard.h
+/// \author bjh1371
+/// \date 2015/06/08
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \class CThreadSafeGuard
+/// \brief 각 쓰레드마다 함수 이름, 파일, 라인을 체크한다.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class CThreadSafeGuard
+{
+private:
+	Milli_t m_StartTime;        ///< 함수 시작 시간
+	Milli_t m_CheckRunningTime; ///< 함수 시간 체크
+
+public:
+	/// \brief 생성자
+	CThreadSafeGuard(const TCHAR* file, int line, const TCHAR* func, Milli_t checkRunningTime);
+	
+	/// \brief 소멸자
+	~CThreadSafeGuard();
+	
+	
+public:
+	/// \brief 함수 입장
+	void Push(const TCHAR* file, int line, const TCHAR* func);
+
+	/// \brief 함수 끝
+	void Pop();
+
+
+public:
+	/// \brief 덤프
+    static void DumpAll(tofstream& ofstream, long crashIndex);
+};
+
+#define SafeGuard() \
+ 	CThreadSafeGuard safeguard(_T(__FILE__), __LINE__, _T(__FUNCTION__), 3000)

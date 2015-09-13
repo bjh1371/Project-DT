@@ -1,0 +1,25 @@
+Option:
+    Output: "SharedPacket.h"
+    Include: ["SharedStruct.h"]
+    Reference: ["ErrorDef.h", "SharedDef.h", "ServerDef.h", "SharedStruct.yaml"]
+    PacketEnumName: SharedPacketId
+    PacketInfoArrayName: g_SharedPacketInfoArray
+    Receiver:
+        Server: ["..\\XEchoServer", "ES"]
+        Client: ["..\\ZEchoClient", "EC"]
+
+
+Struct:
+ 
+ 
+Packet:
+  #-------------------------------------------------------------------------------------------------------
+  # 에코 서버
+  #-------------------------------------------------------------------------------------------------------
+ 
+  - Name: PKTEcho
+    Members:
+      - CString<100> m_Str; ///< 스트링
+
+    Receiver: ["Server", "Client"]
+    Comment: 에코 패킷
