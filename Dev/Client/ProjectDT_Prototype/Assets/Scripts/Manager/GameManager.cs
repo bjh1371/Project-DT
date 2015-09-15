@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance;
     public GameObject testUnit1;
     public GameObject testUnit2;
+    public GameObject projectileTest;
 
     private ushort mTempOId;               /// 스테이지 전용 임시 OId
     private UnitCampData mLeftCamp;        /// 왼쪽 진영 데이터
@@ -128,6 +129,11 @@ public class GameManager : MonoBehaviour {
                 CreateUnit(1, new PathInfo(ePathType.Lower, ePathDirection.Forward));
                 CreateUnit(2, new PathInfo(ePathType.Lower, ePathDirection.Reverse));
             }
+            else if(Input.GetKey(KeyCode.A))
+            {
+                GameObject proj = Instantiate(projectileTest);
+            }
+           
         }
 	}
 
