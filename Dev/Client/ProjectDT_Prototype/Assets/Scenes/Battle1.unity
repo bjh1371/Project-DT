@@ -411,6 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testUnit1: {fileID: 100002, guid: db65442a3fcc14efd9b22be94cbd187a, type: 2}
   testUnit2: {fileID: 111592, guid: db6f183651767f944a85291753a07404, type: 2}
+  projectileTest: {fileID: 100002, guid: 9286323e875a205488c41ba13f0b4730, type: 2}
 --- !u!1 &646528078
 GameObject:
   m_ObjectHideFlags: 0
