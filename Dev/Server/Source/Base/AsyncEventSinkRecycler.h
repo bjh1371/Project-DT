@@ -42,6 +42,11 @@ public:
 	void Add(CAsyncEventSink* sink);
 
 
+public:
+	/// \brief 현재 큐에 있는 가비지 숫자를 반환한다.
+	int GetCount();
+
+
 private:
 	/// \brief 실제 작업 함수
 	virtual void ThreadMain() override;

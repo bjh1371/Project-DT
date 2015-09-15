@@ -74,6 +74,20 @@ public:
 
 
 public:
+	/// \brief 추가한다.
+	inline void Append(LPCTSTR str)
+	{
+		_tcsncat_s(m_Buffer, ARRAYSIZE(m_Buffer), str, _TRUNCATE);
+	}
+
+	/// \brief 초기화 한다.
+	inline void Clear()
+	{
+		m_Buffer[0] = 0;
+	}
+
+
+public:
 	/// \brief 날짜를 반환
 	inline LPCTSTR MakeDate(TCHAR dateSep = '-');
 

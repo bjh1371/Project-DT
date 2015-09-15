@@ -23,7 +23,7 @@ private:
 		WM_POST_LIST = WM_USER + 1, ///< 리스트 이벤트
 		WM_POST_EDIT = WM_USER + 2, ///< 에디트 이벤트
 
-		MAX_ITEM_LENGTH = 64,
+		MAX_ITEM_LENGTH = 128,
 	};
 
 	/// 리스트 아이템 이벤트
@@ -60,6 +60,7 @@ private:
 
 private:
 	HANDLE            m_Mutex;         ///< 중복 실행 방지용 뮤텍스
+	HMODULE           m_RichEditDll;   ///< RichEdit DLL
 	HWND              m_MainWindow;    ///< 윈도우 핸들
 	HWND              m_ListView;      ///< 리스트뷰 핸들
 	HWND              m_Edit;          ///< 에디트 핸들

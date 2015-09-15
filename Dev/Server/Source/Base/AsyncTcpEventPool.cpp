@@ -18,16 +18,16 @@ private:
 	typedef tbb::concurrent_queue<CAsyncTcpEvent*> CEventQueue;
 
 	CEventQueue        m_Queue;      ///< 이벤트 큐
-	int                m_Size;       ///< 사이즈
+	int                m_Capacity;   ///< 사이즈
 	volatile long long m_AllocCount; ///< 할당한 횟수
 
 
 public:
 	/// \brief 생성자
-	CPool(int size)
+	CPool(int capacity)
 	:
 	m_Queue(),
-	m_Size(size),
+	m_Capacity(capacity),
 	m_AllocCount(0)
 	{
 
@@ -59,7 +59,7 @@ public:
 		CAsyncTcpEvent* evt = nullptr;
 		if (!m_Queue.try_pop(evt))
 		{
-			evt = xnew(CAsyncTcpEvent, m_Size);
+			evt = xnew(CAsyncTcpEvent, m_Capacity);
 			InterlockedIncrement64(&m_AllocCount);
 		}
 
@@ -69,8 +69,28 @@ public:
 	/// \brief 회수한다.
 	void Dealloc(CAsyncTcpEvent* evt)
 	{
-		assert(evt->m_Capacity == m_Size && "event size invalid");
-		m_Queue.push(evt);
+		if (evt->m_Capacity == m_Capacity)
+		{
+			m_Queue.push(evt);
+		}
+		else
+		{
+			assert(false && "event size invalid");
+		}
+	}
+
+
+public:
+	/// \brief 사용 가능한 이벤트 숫자 반환
+	int GetFreeCount()
+	{
+		return static_cast<int>(m_Queue.unsafe_size());
+	}
+
+	/// \brief 전체 할당한 숫자 반환
+	int GetTotalCount()
+	{
+		return static_cast<int>(m_AllocCount);
 	}
 };
 
@@ -82,7 +102,7 @@ CAsyncTcpEventPool::CAsyncTcpEventPool()
 m_PoolMap()
 {
 	// 풀 생성
-	for (int i = 2; i <= CAsyncTcpEvent::MAX_CAPACITY; i += 2)
+	for (int i = CAsyncTcpEvent::MIN_CAPACITY; i <= CAsyncTcpEvent::MAX_CAPACITY; i += 2)
 	{
 		CPool* pool = xnew(CPool, i);
 		m_PoolMap.insert(CPoolMap::value_type(i, pool));
@@ -107,7 +127,7 @@ CAsyncTcpEventPool::~CAsyncTcpEventPool()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CAsyncTcpEvent* CAsyncTcpEventPool::Alloc(int size)
 {
-	size = MathUtil::GetNearestPowerOfTwo(size);
+	size = MathUtil::GetNearestPowerOfTwo(size) < CAsyncTcpEvent::MIN_CAPACITY ? CAsyncTcpEvent::MIN_CAPACITY : size;
 
 	CAsyncTcpEvent* evt = nullptr;
 
@@ -145,6 +165,44 @@ void CAsyncTcpEventPool::Dealloc(CAsyncTcpEvent* evt)
 	{
 		assert(false && "invalid alloc size");
 	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief 특정 사이즈 이벤트 큐의 사용 가능한 숫자를 반환한다.
+/// \param int capacity 해당 사이즈
+/// \return int 사용가능한 숫자
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int CAsyncTcpEventPool::GetFreeCount(int capacity)
+{
+	int freeCount = 0;
+	
+	auto itr(m_PoolMap.find(capacity));
+	if (itr != m_PoolMap.end())
+	{
+		CPool* pool = itr->second;
+		freeCount = pool->GetFreeCount();
+	}
+
+	return freeCount;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief 특정 사이즈 이벤트 큐의 전체 할당 한 숫자를 반환한다.
+/// \param int capacity 해당 사이즈
+/// \return int 할당한 숫자
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+int CAsyncTcpEventPool::GetTotalCount(int capacity)
+{
+	int totalCount = 0;
+
+	auto itr(m_PoolMap.find(capacity));
+	if (itr != m_PoolMap.end())
+	{
+		CPool* pool = itr->second;
+		totalCount = pool->GetTotalCount();
+	}
+
+	return totalCount;
 }
 
 CAsyncTcpEventPool* g_AsyncTcpEventPool = nullptr;

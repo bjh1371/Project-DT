@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <commctrl.h>
+#include <Richedit.h>
 
 #include "ServerForm.h"
 
@@ -13,6 +14,8 @@
 #include "Base/Log.h"
 #include "Base/Function.h"
 #include "Base/PathString.h"
+
+#pragma comment(lib, "comctl32")
 
 namespace
 {
@@ -27,6 +30,12 @@ namespace
 
 	/// 에디트 높이 비율
 	const int EDIT_HEIGHT = 2;
+
+	/// \brief 컬럼 키 너비 비율
+	const int KEY_WIDTH = 1;
+	
+	/// \brief 컬럼 값 너비 비율
+	const int VALUE_WIDTH = 3;
 
 	/// 스크롤 마진
 	const int EDIT_SCROLL_MARGIN = 9;
@@ -49,17 +58,18 @@ namespace
 	/// \brief 컬럼 너비 구하기
 	int GetColumnWidth(int width)
 	{
-		return (width - LIST_SCROLL_MARGINE * 2) / 2;
+		return (width - LIST_SCROLL_MARGINE * 2) / (KEY_WIDTH + VALUE_WIDTH);
 	}
 
 	/// \brief 컬럼 속성을 셋팅한다.
-	void SetColumnAttribute(LV_COLUMN& column, LPTSTR name, int width)
+	void SetColumnAttribute(LV_COLUMN& column, LPTSTR name, int width, int rate)
 	{
+		width = GetColumnWidth(width);
 		column.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT | LVCF_WIDTH;
 		column.fmt = LVCFMT_LEFT;
 		column.pszText = name;
 		column.iSubItem = 0;
-		column.cx = GetColumnWidth(width);
+		column.cx = width * rate;
 	}
 
 	/// \brief 리스트 아이템 속성을 셋팅한다.
@@ -78,9 +88,16 @@ namespace
 CServerForm::CServerForm(HINSTANCE hInstance, LPCTSTR title, LPCTSTR guid)
 :
 m_Mutex(NULL),
+m_RichEditDll(LoadLibrary(_T("msftedit.dll"))),
+m_MainWindow(NULL),
+m_ListView(NULL),
+m_Edit(NULL),
 m_Instance(hInstance),
 m_Title(title),
-m_Good(false)
+m_Good(false),
+m_Lock(),
+m_ListItemArray(),
+m_LogQueue()
 {
 	SafeGuard();
 	
@@ -108,6 +125,11 @@ m_Good(false)
 CServerForm::~CServerForm()
 {
 	SafeGuard();
+
+	if (m_RichEditDll)
+	{
+		FreeLibrary(m_RichEditDll);
+	}
 
 	Stop();
 }
@@ -282,10 +304,10 @@ void CServerForm::OnResize(int width, int height)
 	MoveWindow(m_Edit, 0, GetHeight(height, LIST_HEIGHT), GetWidth(width), GetHeight(height, EDIT_HEIGHT), TRUE);
 
 	LV_COLUMN key;
-	SetColumnAttribute(key, _T("key"), width);
+	SetColumnAttribute(key, _T("key"), width, KEY_WIDTH);
 
 	LV_COLUMN value;
-	SetColumnAttribute(value, _T("Value"), width);
+	SetColumnAttribute(value, _T("value"), width, VALUE_WIDTH);
 
 	ListView_SetColumn(m_ListView, 0, &key);
 	ListView_SetColumn(m_ListView, 1, &value);
@@ -331,7 +353,31 @@ void CServerForm::OnPostEdit()
 	m_LogQueue.AcceptPendingItem();
 	for (auto& log : m_LogQueue)
 	{
-		SendMessage(m_Edit, EM_REPLACESEL, 0, (LPARAM)log.c_str());
+		LRESULT lines = SendMessage(m_Edit, EM_GETLINECOUNT, 0, 0);
+		LRESULT chars = SendMessage(m_Edit, WM_GETTEXTLENGTH, 0, 0);
+		SendMessage(m_Edit, EM_SETSEL, chars, chars);
+		if (m_RichEditDll)
+		{
+			CHARFORMAT cf;
+			memset(&cf, 0, sizeof(cf));
+			cf.cbSize = sizeof cf;
+			cf.dwMask = CFM_COLOR;
+
+			switch (log[0])
+			{
+			case _T('D'): cf.crTextColor = RGB(0x8A, 0x2B, 0xE2); break; // debug
+				//case _T('S'): cf.crTextColor = RGB(0x22, 0x8B, 0x22); break; // status
+			case _T('W'): cf.crTextColor = RGB(0xB8, 0x86, 0x0B); break; // warning
+			case _T('E'): cf.crTextColor = RGB(0xFF, 0x00, 0x00); break; // error
+			default:      cf.crTextColor = RGB(0x00, 0x00, 0x00); break; // warning
+			}
+
+			SendMessage(m_Edit, EM_SETCHARFORMAT, SCF_SELECTION, reinterpret_cast<LPARAM>(&cf));
+		}
+
+		SendMessage(m_Edit, EM_REPLACESEL, TRUE, reinterpret_cast<LPARAM>(log.c_str()));
+		SendMessage(m_Edit, EM_LINESCROLL, 0, SendMessage(m_Edit, EM_GETLINECOUNT, 0, 0) - lines);
+		// SendMessage(m_Edit, EM_REPLACESEL, 0, (LPARAM)log.c_str());
 	}
 	m_LogQueue.clear();
 }
@@ -440,20 +486,32 @@ void CServerForm::ThreadMain()
 		WS_VISIBLE | WS_CHILD | WS_BORDER | LVS_REPORT,
 		0, 0, GetWidth(WIDTH), GetHeight(HEIGHT, LIST_HEIGHT), m_MainWindow, NULL, m_Instance, NULL);
 
-	m_Edit = CreateWindow(_T("Edit"), NULL,
-	    WS_CHILD | WS_VISIBLE | WS_BORDER | WS_HSCROLL | WS_VSCROLL |
-	    ES_MULTILINE | ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_READONLY,
-	    0, GetHeight(HEIGHT, LIST_HEIGHT), GetWidth(WIDTH), GetHeight(HEIGHT, EDIT_HEIGHT), m_MainWindow, NULL, m_Instance, NULL);
+	if (m_RichEditDll)
+	{
+		m_Edit = CreateWindowEx(0, MSFTEDIT_CLASS, NULL, WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS |
+			WS_BORDER | WS_VSCROLL | WS_HSCROLL | ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY,
+			0, GetHeight(HEIGHT, LIST_HEIGHT), GetWidth(WIDTH), GetHeight(HEIGHT, EDIT_HEIGHT),
+			m_MainWindow, NULL, m_Instance, NULL);
+
+		SendMessage(m_Edit, WM_SETFONT, (WPARAM)GetStockObject(DEFAULT_GUI_FONT), TRUE);
+	}
+ 	else
+	{
+		m_Edit = CreateWindow(_T("Edit"), NULL,
+		WS_CHILD | WS_VISIBLE | WS_BORDER | WS_HSCROLL | WS_VSCROLL |
+		ES_MULTILINE | ES_AUTOHSCROLL | ES_AUTOVSCROLL | ES_READONLY,
+		0, GetHeight(HEIGHT, LIST_HEIGHT), GetWidth(WIDTH), GetHeight(HEIGHT, EDIT_HEIGHT), m_MainWindow, NULL, m_Instance, NULL);
+	}
 
 	ListView_SetExtendedListViewStyle(m_ListView, LVS_EX_GRIDLINES);
 
 	ShowWindow(m_MainWindow, SW_SHOWNORMAL);
 
 	LV_COLUMN key;
-	SetColumnAttribute(key, _T("key"), WIDTH);
+	SetColumnAttribute(key, _T("key"), WIDTH, KEY_WIDTH);
 	
 	LV_COLUMN value;
-	SetColumnAttribute(value, _T("Value"), WIDTH);
+	SetColumnAttribute(value, _T("value"), WIDTH, VALUE_WIDTH);
 
 	ListView_InsertColumn(m_ListView, 0, &key);
 	ListView_InsertColumn(m_ListView, 1, &value);

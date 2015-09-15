@@ -61,5 +61,5 @@ void CEchoServer::ReportStatus()
 {
 	__super::ReportStatus();
 
-	PostItem(_T("AllocPeer"), Generic::FormatSafe(_T("%a / %a"), m_EchoClientListener->GetFreeCount(), m_EchoClientListener->GetAllocCount()));
+	PostItem(_T("ClientPeer"), Generic::FormatSafe(_T("%a / %a"), m_EchoClientListener->GetFreeCount(), m_EchoClientListener->GetAllocCount()));
 }

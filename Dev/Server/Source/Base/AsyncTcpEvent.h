@@ -45,7 +45,8 @@ public:
 	{
 		ACCEPT_BUF_SIZE = 64, ///< AcceptEvent시 크기
 
-		MAX_CAPACITY = 65535, ///< 버퍼 크기
+		MAX_CAPACITY = 65536, ///< 버퍼 크기
+		MIN_CAPACITY = 8,
 	};
 
 

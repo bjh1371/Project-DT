@@ -38,6 +38,14 @@ public:
 
 	/// \brief 메모리 회수
 	void Dealloc(CAsyncTcpEvent* evt);
+
+
+public:
+	/// \brief 사용 가능 이벤트
+	int GetFreeCount(int capacity);
+
+	/// \brief 전체 할당한 이벤트
+	int GetTotalCount(int capacity);
 };
 
 extern CAsyncTcpEventPool* g_AsyncTcpEventPool;

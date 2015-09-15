@@ -415,7 +415,7 @@ void CAsyncTcpSocket::PostDisconnect(CAsyncTcpEvent::DisconnectReason dr)
 			// 접속 종료 콜백 호출
 			m_Peer->OnDisconnected();
 
-			// TRACE(_T("disconnect reason : %a"), dr);
+			TRACE(_T("disconnect reason : %a"), dr);
 
 			if (g_AsyncEventSinkRecycler)
 				g_AsyncEventSinkRecycler->Add(m_Peer);

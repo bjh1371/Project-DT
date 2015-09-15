@@ -14,6 +14,7 @@
 #include "Base/AsyncTcpEventPool.h"
 #include "Base/AsyncTcpSocketPool.h"
 #include "Base/AsyncTimerRegistry.h"
+#include "Base/FixedString.h"
 #include "Base/Lifespan.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +74,7 @@ void CServerApp::Start()
 		if (success)
 		{
 			// 타이머 시작
-			m_StatusTimer = g_AsyncTimerRegistry->AddTimer(this, 100, Clock::BOUNDLESS);
+			m_StatusTimer = g_AsyncTimerRegistry->AddTimer(this, 500, Clock::BOUNDLESS);
 
 			while (IsAppRunning())
 			{
@@ -138,8 +139,31 @@ void CServerApp::ReportStatus()
 	SafeGuard();
 
 	// 상태 보고
-	PostItem(_T("AllocTcpEvent"), CAsyncTcpEvent::GetCurrentEvent());
 	PostItem(_T("AllocTcpSocket"), Generic::FormatSafe(_T("%a / %a"), g_AsyncTcpSocketPool->GetFreeCount(), g_AsyncTcpSocketPool->GetAllocCount()));
+	PostItem(_T("GarbageSinkCount"), g_AsyncEventSinkRecycler->GetCount());
+
+	CFixedString<64> key;
+	CFixedString<128> values;
+	CFixedString<64> v;
+	for (int capacity = CAsyncTcpEvent::MIN_CAPACITY; capacity <= CAsyncTcpEvent::MAX_CAPACITY;)
+	{
+		int maxCapacity = capacity<<2;
+		maxCapacity = maxCapacity < CAsyncTcpEvent::MAX_CAPACITY ? maxCapacity : CAsyncTcpEvent::MAX_CAPACITY;
+		key.FormatSafe(_T("AsyncTcpEvent ~ %a"), maxCapacity);
+		for (int i = 0; i < 3 && capacity <= CAsyncTcpEvent::MAX_CAPACITY; capacity *= 2, ++i)
+		{
+			if (capacity <= CAsyncTcpEvent::MAX_CAPACITY)
+			{
+				v.FormatSafe(_T("%a =  %a / %a,  "), capacity, g_AsyncTcpEventPool->GetFreeCount(capacity), g_AsyncTcpEventPool->GetTotalCount(capacity));
+				values.Append(v);
+			}
+			else
+				break;
+		}
+
+		PostItem(key, values);
+		values.Clear();
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
