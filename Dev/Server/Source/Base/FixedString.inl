@@ -1,0 +1,77 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file FixedString.inl
+/// \author bjh1371
+/// \date 2015/07/06
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief 날짜를 반환한다.
+/// \param TCHAR dateSep 날짜 구분자
+/// \return LPCTSTR
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+template <size_t MAX_CAPACITY>
+LPCTSTR CFixedString<MAX_CAPACITY>::MakeDate(TCHAR dateSep = '-')
+{
+	SYSTEMTIME t;
+	GetLocalTime(&t);
+
+	_stprintf_s(
+	 m_Buffer, ARRAYSIZE(m_Buffer),
+	 _T("%04d%c%02d%c%02d"),
+	 t.wYear, dateSep, t.wMonth, dateSep, t.wDay,
+	 _TRUNCATE
+	 );
+
+	return m_Buffer;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief 현재 시간을 반환한다
+/// \param TCHAR timeSep 시간 구분자
+/// \return LPCTSTR
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+template <size_t MAX_CAPACITY>
+LPCTSTR CFixedString<MAX_CAPACITY>::MakeTime(TCHAR timeSep = ':')
+{
+	SYSTEMTIME t;
+	GetLocalTime(&t);
+
+	_stprintf_s(
+	 m_Buffer, ARRAYSIZE(m_Buffer),
+	 _T("%02d%c%02d%c%02d"),
+	 t.wHour, timeSep, t.wMinute, timeSep, t.wSecond, timeSep,
+	 _TRUNCATE
+	 );
+
+	return m_Buffer;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief 날짜와 시간을 반환한다.
+/// \param TCHAR dateSep 날짜 구분자
+/// \param TCHAR dateTimeSep 날짜와 시간 사이 구분자
+/// \param TCHAR timeSep 시간 구분자
+/// \return LPCTSTR
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+template <size_t MAX_CAPACITY>
+LPCTSTR CFixedString<MAX_CAPACITY>::MakeDateTime(TCHAR dateSep = '-', TCHAR dateTimeSep = ' ', TCHAR timeSep = ':')
+{
+	SYSTEMTIME t;
+	GetLocalTime(&t);
+
+	_stprintf_s(
+	 m_Buffer, ARRAYSIZE(m_Buffer),
+	 _T("%04d%c%02d%c%02d")
+	 _T("%c")
+	 _T("%02d%c%02d%c%02d"),
+	 t.wYear, dateSep, t.wMonth, dateSep, t.wDay,
+	 dateTimeSep,
+	 t.wHour, timeSep, t.wMinute, timeSep, t.wSecond, timeSep,
+	 _TRUNCATE
+	 );
+
+	return m_Buffer;
+}

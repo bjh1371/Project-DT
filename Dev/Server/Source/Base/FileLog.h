@@ -1,0 +1,50 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file FileLog.h
+/// \author bjh1371
+/// \date 2015/07/07
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \class CFileLog
+/// \brief 파일에 로그를 작성하기 위한 클래스
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class CFileLog
+{
+private:
+	HANDLE m_File; ///< 파일 핸들
+	
+
+public:
+	/// \brief 생성자
+	CFileLog(LPCTSTR fileName = nullptr);
+	
+	/// \brief 소멸자
+	~CFileLog();
+
+
+public:
+	/// \brief 파일을 연다.
+	bool Open(LPCTSTR fileName);
+
+	/// \brief 정상적으로 열려있는가?
+	bool IsOpen() { return m_File == INVALID_HANDLE_VALUE; }
+	
+	
+public:
+	/// \brief 로그를 작성한다.
+	void Write(LPCTSTR log);
+
+	/// \brief 포맷 형식의 로그를 작성한다.
+	template <typename... Arguments>
+	void WriteFormatted(LPCTSTR fmt, const Arguments&... arg)
+	{
+		CFixedString<2048> fixedString;
+		Write(fixedString.FormatSafe(fmt, arg...));
+	}
+
+	/// \brief 파일을 열기를 종료
+	void Close();
+};

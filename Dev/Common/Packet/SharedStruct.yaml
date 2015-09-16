@@ -1,0 +1,17 @@
+Option:
+    Output: "SharedStruct.h"
+    Include: ["PacketBase.h", "PacketElement.h"]
+    Reference: ["ErrorDef.h", "SharedDef.h", "ServerDef.h"]
+    PacketEnumName:
+    PacketInfoArrayName:
+
+Packet:
+ 
+ 
+Struct:
+  - Name: CWorldData
+    Members:
+      - WorldId_t                      m_Id;       ///< 월드 ID
+      - CString<MAX_WORLD_NAME_LENGTH> m_Name;     ///< 월드 이름
+      - char                           m_PCCount;  ///< 계정에 있는 PC의 갯수
+    Comment: 월드 정보

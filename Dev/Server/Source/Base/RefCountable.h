@@ -1,0 +1,52 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file RefCountable.h
+/// \author bjh1371
+/// \date 2015/07/02
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \class CRefCountable
+/// \brief 레퍼런스 카운트
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class CRefCountable
+{
+public:
+	enum Refcount
+	{
+		REFCOUNT_SEND,
+		REFCOUNT_FLUSHQUEUE,
+		REFCOUNT_RECV,
+		REFCOUNT_INIT,
+		REFCOUNT_CONNECT,
+		REFCOUNT_DISCONNECT,
+		REFCOUNT_TIMER,
+		REFCOUNT_PC_CREATE,
+		REFCOUNT_MAX,
+	};
+
+
+private:
+	std::atomic<int>  m_RefCountArray[REFCOUNT_MAX]; ///< 레퍼카운트
+
+
+public:
+	/// \brief 생성자
+	CRefCountable();
+	
+	/// \brief 소멸자
+	virtual ~CRefCountable();
+	
+	
+public:
+	/// \brief 레퍼카운트 증가
+	int IncreaseRefCount(Refcount refcount);
+
+	/// \brief 레퍼카운트 감소
+	int DecreaseRefCount(Refcount refcount);
+
+	/// \brief 삭제 가능한가?
+	bool IsSafeToDelete() const;
+};

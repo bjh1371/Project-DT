@@ -1,0 +1,51 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \file AsyncTcpEventPool.h
+/// \author bjh1371
+/// \date 2015/09/13
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+class CAsyncTcpEvent;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \class CAsyncTcpEventPool
+/// \brief TcpEvent MemoryPool
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class CAsyncTcpEventPool
+{
+private:
+	class CPool;
+	typedef stx::unordered_map<int, CPool*> CPoolMap;
+
+
+private:
+	CPoolMap m_PoolMap; ///< Byte별 풀 맵
+
+
+public:
+	/// \brief 생성자
+	CAsyncTcpEventPool();
+	
+	/// \brief 소멸자
+	~CAsyncTcpEventPool();
+	
+	
+public:
+	/// \brief 메모리를 할당한다.
+	CAsyncTcpEvent* Alloc(int size);
+
+	/// \brief 메모리 회수
+	void Dealloc(CAsyncTcpEvent* evt);
+
+
+public:
+	/// \brief 사용 가능 이벤트
+	int GetFreeCount(int capacity);
+
+	/// \brief 전체 할당한 이벤트
+	int GetTotalCount(int capacity);
+};
+
+extern CAsyncTcpEventPool* g_AsyncTcpEventPool;

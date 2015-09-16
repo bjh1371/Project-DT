@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2d4249fb-aa61-4d9a-bb52-2552a1ee266a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Don%27t Care">
+      <UniqueIdentifier>{8fe8a3f9-4191-4ccb-bdab-c8b70391145a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Log">
+      <UniqueIdentifier>{dd71518e-4d90-4563-969e-9daaa6faa435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{3deb21f6-e5a9-44c5-bd00-bff47f8938c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lock">
+      <UniqueIdentifier>{11928795-5893-4eff-9783-b0c5904b981b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{6b12d2b3-ae94-48fd-adb7-d0ddfa784882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{20fb1c86-47b1-44db-a4af-e891e2edcbb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exception">
+      <UniqueIdentifier>{8e62a733-9d1e-4cd6-90c6-68cae55077ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{6fb1318a-8082-4412-946b-8c9b15b30619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Base">
+      <UniqueIdentifier>{9fb37c65-e9cc-42ed-809f-ca3cb588b297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Tcp">
+      <UniqueIdentifier>{d354d2c2-e98a-436d-9b70-0e229577c8c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Timer">
+      <UniqueIdentifier>{ac39942d-ed2d-403e-91a5-654ba84a4884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DesignPettern">
+      <UniqueIdentifier>{e8d88b96-60bf-420a-8afe-1f240f966918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Concept">
+      <UniqueIdentifier>{acae4f84-b29d-4ba8-ae52-3a0076874df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{1a6ac0df-d46e-4e7f-8ab7-c73117cd26ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Container">
+      <UniqueIdentifier>{c0e3d3e0-60f3-4efd-9c86-671ccc07fee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\Tcp\Legacy">
+      <UniqueIdentifier>{a5615f5d-d3df-4089-8d95-aef3c7dfc5e1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Platform.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="BasePCH.h">
+      <Filter>!Don%27t Care</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadRegistry.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Lockable.h">
+      <Filter>Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="StackWalker.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSafeGuard.h">
+      <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncEvent.h">
+      <Filter>Network\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpEvent.h">
+      <Filter>Network\Tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncEventSink.h">
+      <Filter>Network\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncDispatcher.h">
+      <Filter>Network\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpPeer.h">
+      <Filter>Network\Tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="FixedString.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="FixedToken.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTimerEvent.h">
+      <Filter>Network\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTimerRegistry.h">
+      <Filter>Network\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncMarshaller.h">
+      <Filter>Network\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLog.h">
+      <Filter>Log</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpSocket.h">
+      <Filter>Network\Tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PathString.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>DesignPettern</Filter>
+    </ClInclude>
+    <ClInclude Include="Generic.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Lifespan.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Countable.h">
+      <Filter>Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="NoneCopyable.h">
+      <Filter>Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="RefCountable.h">
+      <Filter>Concept</Filter>
+    </ClInclude>
+    <ClInclude Include="AppEnv.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BootStrap.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncPeerListener.h">
+      <Filter>Network\Tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Pool.h">
+      <Filter>Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpSocketPool.h">
+      <Filter>Network\Tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="Thread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadSafeQueue.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpEventSink.h">
+      <Filter>Network\Tcp\Legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncEventSinkRecycler.h">
+      <Filter>Network\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpEventPool.h">
+      <Filter>Network\Tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="AsyncTcpSendEvent.h">
+      <Filter>Network\Tcp\Legacy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Log.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="BasePCH.cpp">
+      <Filter>!Don%27t Care</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadRegistry.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Lockable.cpp">
+      <Filter>Lock</Filter>
+    </ClCompile>
+    <ClCompile Include="StackWalker.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSafeGuard.cpp">
+      <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncEvent.cpp">
+      <Filter>Network\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpEvent.cpp">
+      <Filter>Network\Tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncEventSink.cpp">
+      <Filter>Network\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncDispatcher.cpp">
+      <Filter>Network\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpPeer.cpp">
+      <Filter>Network\Tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedToken.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTimerEvent.cpp">
+      <Filter>Network\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTimerRegistry.cpp">
+      <Filter>Network\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncMarshaller.cpp">
+      <Filter>Network\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLog.cpp">
+      <Filter>Log</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpSocket.cpp">
+      <Filter>Network\Tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="PathString.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>DesignPettern</Filter>
+    </ClCompile>
+    <ClCompile Include="Generic.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Countable.cpp">
+      <Filter>Concept</Filter>
+    </ClCompile>
+    <ClCompile Include="Lifespan.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="NoneCopyable.cpp">
+      <Filter>Concept</Filter>
+    </ClCompile>
+    <ClCompile Include="RefCountable.cpp">
+      <Filter>Concept</Filter>
+    </ClCompile>
+    <ClCompile Include="AppEnv.cpp">
+      <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="BootStrap.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncPeerListener.cpp">
+      <Filter>Network\Tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Pool.cpp">
+      <Filter>Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpSocketPool.cpp">
+      <Filter>Network\Tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="Thread.cpp">
+      <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadSafeQueue.cpp">
+      <Filter>Container</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpEventSink.cpp">
+      <Filter>Network\Tcp\Legacy</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncEventSinkRecycler.cpp">
+      <Filter>Network\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpEventPool.cpp">
+      <Filter>Network\Tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncTcpSendEvent.cpp">
+      <Filter>Network\Tcp\Legacy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FixedString.inl">
+      <Filter>String</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AppEnv.h" />
+    <ClInclude Include="AsyncEvent.h" />
+    <ClInclude Include="AsyncTcpEvent.h" />
+    <ClInclude Include="AsyncTcpEventPool.h" />
+    <ClInclude Include="AsyncTcpEventSink.h" />
+    <ClInclude Include="AsyncTcpSendEvent.h" />
+    <ClInclude Include="AsyncTcpSocket.h" />
+    <ClInclude Include="AsyncTcpSocketPool.h" />
+    <ClInclude Include="AsyncTimerEvent.h" />
+    <ClInclude Include="BasePCH.h" />
+    <ClInclude Include="BootStrap.h" />
+    <ClInclude Include="Clock.h" />
+    <ClInclude Include="Countable.h" />
+    <ClInclude Include="AsyncEventSink.h" />
+    <ClInclude Include="Exception.h" />
+    <ClInclude Include="AsyncDispatcher.h" />
+    <ClInclude Include="FileLog.h" />
+    <ClInclude Include="FixedString.h" />
+    <ClInclude Include="FixedToken.h" />
+    <ClInclude Include="Function.h" />
+    <ClInclude Include="Generic.h" />
+    <ClInclude Include="Lifespan.h" />
+    <ClInclude Include="Lockable.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="AsyncMarshaller.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="Memory.h" />
+    <ClInclude Include="NoneCopyable.h" />
+    <ClInclude Include="PathString.h" />
+    <ClInclude Include="Platform.h" />
+    <ClInclude Include="Pool.h" />
+    <ClInclude Include="RefCountable.h" />
+    <ClInclude Include="AsyncTcpPeer.h" />
+    <ClInclude Include="AsyncPeerListener.h" />
+    <ClInclude Include="AsyncEventSinkRecycler.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="StackWalker.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="ThreadRegistry.h" />
+    <ClInclude Include="ThreadSafeGuard.h" />
+    <ClInclude Include="AsyncTimerRegistry.h" />
+    <ClInclude Include="ThreadSafeQueue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AppEnv.cpp" />
+    <ClCompile Include="AsyncEvent.cpp" />
+    <ClCompile Include="AsyncTcpEvent.cpp" />
+    <ClCompile Include="AsyncTcpEventPool.cpp" />
+    <ClCompile Include="AsyncTcpEventSink.cpp" />
+    <ClCompile Include="AsyncTcpSendEvent.cpp" />
+    <ClCompile Include="AsyncTcpSocket.cpp" />
+    <ClCompile Include="AsyncTcpSocketPool.cpp" />
+    <ClCompile Include="AsyncTimerEvent.cpp" />
+    <ClCompile Include="BasePCH.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BasePCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">BasePCH.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="BootStrap.cpp" />
+    <ClCompile Include="Clock.cpp" />
+    <ClCompile Include="Countable.cpp" />
+    <ClCompile Include="AsyncEventSink.cpp" />
+    <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="AsyncDispatcher.cpp" />
+    <ClCompile Include="FileLog.cpp" />
+    <ClCompile Include="FixedToken.cpp" />
+    <ClCompile Include="Function.cpp" />
+    <ClCompile Include="Generic.cpp" />
+    <ClCompile Include="Lifespan.cpp" />
+    <ClCompile Include="Lockable.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="AsyncMarshaller.cpp" />
+    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="Memory.cpp" />
+    <ClCompile Include="NoneCopyable.cpp" />
+    <ClCompile Include="PathString.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="Pool.cpp" />
+    <ClCompile Include="RefCountable.cpp" />
+    <ClCompile Include="AsyncTcpPeer.cpp" />
+    <ClCompile Include="AsyncPeerListener.cpp" />
+    <ClCompile Include="AsyncEventSinkRecycler.cpp" />
+    <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="StackWalker.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="ThreadRegistry.cpp" />
+    <ClCompile Include="ThreadSafeGuard.cpp" />
+    <ClCompile Include="AsyncTimerRegistry.cpp" />
+    <ClCompile Include="ThreadSafeQueue.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FixedString.inl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{95B905EE-F5BD-415A-B3F5-ABD6D18EE2BF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Base</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Prop\ServerCpp.props" />
+    <Import Project="..\Prop\ServerLib.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Prop\ServerCpp.props" />
+    <Import Project="..\Prop\ServerLib.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>BasePCH.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>BasePCH.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>BasePCH.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>BasePCH.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
