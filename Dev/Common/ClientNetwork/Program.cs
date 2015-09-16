@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace ClientNetwork
 {
-    interface IPacket
-    {
-        int Read(CReadBuffer buffer);
-
-        int Write(CWriteBuffer buffer);
-    }
+   
     class Program
     {
+        // 서버와 통신하는 테스트 프로그램을 만들자.
         static void Main(string[] args)
         {
             
