@@ -1,22 +1,25 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitBase.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Manager\PathManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Manager\GameManager.cs" Line="27" Column="61" />
-      <File FileName="Assets\Scripts\Unit\UnitBase.cs" Line="88" Column="25" />
-      <File FileName="Assets\Scripts\Unit\UnitState\AttackState.cs" Line="31" Column="19" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitState\MoveState.cs" Line="24" Column="42" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitState\UnitState.cs" Line="18" Column="31" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitStat.cs" Line="34" Column="30" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitState\AttackState.cs" Line="14" Column="6" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitState\IdleState.cs" Line="10" Column="29" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Manager\Log.cs" Line="1" Column="1" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Manager\GameManager.cs" Line="46" Column="3" />
-      <File FileName="..\..\..\..\..\ProjectDP_Prototype\Assets\Scripts\Unit\UnitBase.cs" Line="9" Column="22" />
+      <File FileName="Assets\Scripts\Unit\UnitBase.cs" Line="22" Column="43" />
+      <File FileName="Assets\Scripts\Manager\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\MoveState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\AttackState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\IdleState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitStat.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Unit\UnitState\DeadState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Manager\PathManager.cs" Line="64" Column="21" />
+      <File FileName="Assets\Scripts\Unit\UnitState\UnitState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Etc\R.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Manager\Log.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="D:\Work\UnityEngine\Project_DT\Project-DT\Dev\Client\ProjectDT_Prototype\Assets\Scripts\Unit\UnitState\AttackState.cs" line="78" />
+      <Breakpoint file="D:\Work\UnityEngine\Project_DT\Project-DT\Dev\Client\ProjectDT_Prototype\Assets\Scripts\Unit\UnitState\AttackState.cs" line="53" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

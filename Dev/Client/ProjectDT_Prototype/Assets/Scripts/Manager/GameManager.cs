@@ -35,8 +35,10 @@ public class UnitLaneData
     /// </summary>
     /// <param name="_unit">기준 유닛</param>
     /// <param name="_dampingFactor">범위 감쇠값 (다른 라인 유닛을 검색할때 사용)</param>
-    public UnitBase GetCloseAttackTarget(UnitBase _unit, float _dampingFactor = 1.0f)
+    public UnitBase GetCloseAttackTarget(UnitBase _unit, float _dampingFactor)
     {
+		if (_dampingFactor == null)
+			_dampingFactor = 1.0f;
         //. 검사 범위 계산 min - max 
         Vector3 callerPos = _unit.transform.position;
         int searchDirection = (_unit.mCamp == ePlayerCamp.Right) ? -1 : 1;  //. Right면 오른쪽에서 왼쪽으로 검사
@@ -211,45 +213,27 @@ public class GameManager : MonoBehaviour {
         //. Todo 유닛 목록에서 classID 맞는 스탯 정보 Get
 
         //. 임시 테스트 데이터
-        UnitStat unitstat = null;
         PathInfo unitpath = null;
         GameObject template = null;
+		//테스트용 밀리유닛
         if( _unitClassID == 1 )
         {
-            unitstat = new UnitStat();
-            unitstat.mMoveSpeed = UnityEngine.Random.Range(0.5f, 3.0f);
-            unitstat.mAttackSpeed = UnityEngine.Random.Range(0.5f, 2.0f);
-            unitstat.mAttackDelay = UnityEngine.Random.Range(0.0f, 1.0f);
-            unitstat.mHP = UnityEngine.Random.Range(40, 15);
-            unitstat.mDefence = 1;
-            unitstat.mAttackPower = 3;
-            unitstat.mAttackRange = 1;
-            unitstat.mAttackType = eAttackType.Melee;
-
             template = testUnit1;
             unitpath = _pathInfo;
         }
+		//테스트용 원거리유닛
         else
         {
-            unitstat = new UnitStat();
-            unitstat.mMoveSpeed = UnityEngine.Random.Range(0.5f, 3.0f);
-            unitstat.mAttackSpeed = UnityEngine.Random.Range(0.5f, 2.0f);
-            unitstat.mAttackDelay = UnityEngine.Random.Range(0.0f, 1.0f);
-            unitstat.mHP = UnityEngine.Random.Range(40, 15);
-            unitstat.mDefence = 1;
-            unitstat.mAttackPower = 3;
-            unitstat.mAttackRange = 1;
-            unitstat.mAttackType = eAttackType.Melee;
-
             template = testUnit2;
             unitpath = _pathInfo;
         }
 
+		//유닛 생성
         GameObject unit = Instantiate(template);
         UnitBase unitInstance = unit.GetComponent<UnitBase>();
-        unitInstance.InitUnit(unitstat, unitpath);       
+        unitInstance.InitUnit(unitpath);
 
-        //. 생성 통지
+        // 생성 통지
         OnCreateUnitNotify(unitInstance);
     }
 
@@ -285,7 +269,7 @@ public class GameManager : MonoBehaviour {
         if(sameUnitLane == null)
             return null;
 
-        UnitBase closeTarget = sameUnitLane.GetCloseAttackTarget(_caller);
+        UnitBase closeTarget = sameUnitLane.GetCloseAttackTarget(_caller, 1.0f);
 
         //. 레인지 유닛이면 다른 라인도 검사
         if(_caller.mStat.mAttackType == eAttackType.Range)
