@@ -7,22 +7,21 @@ using System.Runtime.InteropServices;
 
 namespace ClientNetwork
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    struct PingPacket
+    // [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    struct PingPacket : IPacket
     {
-        public int x;
-        public int y;
-        public int z;
+        public CString m_Str;
+
+        public int GetId() { return 0; }
 
         public int Read(CReadBuffer buffer)
         {
-            return buffer.Read(ref this);
-
+            return m_Str.Read(buffer);
         }
 
         public int Write(CWriteBuffer buffer)
         {
-            return buffer.Write(ref this);
+            return m_Str.Write(buffer);
         }
     }
 }

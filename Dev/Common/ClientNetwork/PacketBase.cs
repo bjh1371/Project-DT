@@ -7,6 +7,23 @@ using System.Runtime.InteropServices;
 
 namespace ClientNetwork
 {
+   class CPacketBase
+   {
+       private static int PACKET_HEADER_LENGTH = sizeof(short) + sizeof(short);
+       private static int PACKET_HEADER_FULL_LENGTH = sizeof(short) + sizeof(short) + sizeof(short);
+
+       public static int HeaderLength
+       {
+           get { return PACKET_HEADER_LENGTH; }
+       }
+
+       public static int HeaderFullLength
+       {
+           get { return PACKET_HEADER_FULL_LENGTH; }
+       }
+
+   }
+    
     class CReadBuffer
     {
         private byte[] m_Array;
@@ -140,6 +157,8 @@ namespace ClientNetwork
         int Read(CReadBuffer buffer);
 
         int Write(CWriteBuffer buffer);
+
+        int GetId();
     }
 
     struct CString : IPacket
@@ -161,6 +180,8 @@ namespace ClientNetwork
         {
             return new string(arr);
         }
+
+        public int GetId() { return -1; }
 
         public int Read(CReadBuffer buf)
         {
@@ -207,6 +228,8 @@ namespace ClientNetwork
             list = new T[length];
             count = 0;
         }
+
+        public int GetId() { return -1; }
 
         public void Append(ref T value)
         {

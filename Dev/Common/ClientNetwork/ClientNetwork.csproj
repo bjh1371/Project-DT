@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientPeer.cs" />
+    <Compile Include="ClientStreamBuffer.cs" />
+    <Compile Include="ClientSocket.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="PacketBase.cs" />
+    <Compile Include="PacketMarshaller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
