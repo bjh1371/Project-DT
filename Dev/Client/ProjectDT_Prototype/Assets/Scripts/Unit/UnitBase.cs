@@ -2,6 +2,16 @@
 using System.Collections;
 
 public class UnitBase : MonoBehaviour {
+
+	public float MoveSpeed = 1.5f;
+	public float AttackSpeed = 0.15f;
+	public float AttackDelay = 10.0f;
+	public int HP = 40;
+	public int Defence = 1;
+	public int AttackPower = 1;
+	public int AttackRange = 1;
+	public eAttackType AttackType = eAttackType.None;
+
     public ushort mOId { get; set; }                    /// 오브젝트 아이디
     public ePlayerCamp mCamp { get; set; }              /// 유닛 소속 진영
     
@@ -19,6 +29,7 @@ public class UnitBase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 	}
 	
 	// Update is called once per frame
@@ -61,9 +72,20 @@ public class UnitBase : MonoBehaviour {
     /// <summary>
     /// 유닛 초기화
     /// </summary>
-    public void InitUnit(UnitStat _stat, PathInfo _pathInfo)
+    public void InitUnit(PathInfo _pathInfo)
     {
-        mStat = _stat;
+		UnitStat unitStat = new UnitStat();
+
+		unitStat.mMoveSpeed 	= MoveSpeed;
+		unitStat.mAttackSpeed 	= AttackSpeed;
+		unitStat.mAttackDelay 	= AttackDelay;
+		unitStat.mHP 			= HP;
+		unitStat.mDefence 		= Defence;
+		unitStat.mAttackPower 	= AttackPower;
+		unitStat.mAttackRange 	= AttackRange;
+		unitStat.mAttackType 	= AttackType;
+
+		mStat = unitStat;
         mPathInfo = _pathInfo;
 
         //. 캐릭터 방향, 진영 설정.
@@ -137,9 +159,9 @@ public class UnitBase : MonoBehaviour {
         switch(_eUnitState)
         {
             case eUnitState.Attack: return new AttackState(this);
-            case eUnitState.Dead: return new DeadState(this);
-            case eUnitState.Idle: return new IdleState(this);
-            case eUnitState.Move: return new MoveState(this);
+            case eUnitState.Dead:   return new DeadState(this);
+            case eUnitState.Idle:   return new IdleState(this);
+            case eUnitState.Move:   return new MoveState(this);
         }
 
         Log.PrintError(eLogFilter.Normal, "invalid parameter (CreateUnitState)");
