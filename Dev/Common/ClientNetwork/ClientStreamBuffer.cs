@@ -66,7 +66,8 @@ namespace ClientNetwork
         {
             if (m_Tail + length <= m_Capacity)
             {
-                System.Buffer.BlockCopy(m_ByteArray, m_Tail, data, 0, length);
+                System.Buffer.BlockCopy(data, 0, m_ByteArray, m_Tail, length);
+                m_Tail += length;
             }
             else
             {
@@ -90,7 +91,7 @@ namespace ClientNetwork
         {
             if (handled > 0)
             {
-                System.Buffer.BlockCopy(m_ByteArray, 0, m_ByteArray, handled, m_Tail - handled);
+                System.Buffer.BlockCopy(m_ByteArray, handled, m_ByteArray, 0, m_Tail - handled);
             }
 
             m_Tail -= handled;

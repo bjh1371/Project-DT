@@ -16,10 +16,14 @@ namespace ClientNetwork
 
             peer.Connect("127.0.0.1", 6010);
 
-            if (peer.IsConnected() && peer.GetErrorCount() == 0)
+          if (peer.IsConnected() && peer.GetErrorCount() == 0)
             {
-                
+                PingPacket ping;
+                ping.m_Str = "Test";
+                peer.Send(ping);
+                peer.Flush();
             }
+            int a = 10;
         }
     }
 }

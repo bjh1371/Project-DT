@@ -13,6 +13,8 @@
 #include "StackWalker.h"
 #include "ThreadRegistry.h"
 
+#pragma comment(lib, "DbgHelp")
+
 #define MAX_BUF_SIZE 1024
 
 namespace
@@ -28,10 +30,10 @@ namespace
 		 fileName, ARRAYSIZE(fileName),
 		 _T("%04d%c%02d%c%02d")
 		 _T("%c")
-		 _T("%02d%c%02d%c%02d"),
-		 t.wYear, _T("-"), t.wMonth, _T("-"), t.wDay,
-		 _T(" "),
-		 t.wHour, _T("-"), t.wMinute, _T("-"), t.wSecond, _T("-"),
+		 _T("%02d%c%02d%c%02d.dmp"),
+		 t.wYear, _T('-'), t.wMonth, _T('-'), t.wDay,
+		 _T(' '),
+		 t.wHour, _T('-'), t.wMinute, _T('-'), t.wSecond, _T('-'),
 		 _TRUNCATE
 		 );
 
@@ -45,8 +47,7 @@ namespace
 		exceptionInfo.ClientPointers = FALSE;
 
 		MINIDUMP_TYPE mdt = (MINIDUMP_TYPE)(MiniDumpWithFullMemory);
-
-	//	MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, mdt, (e != 0) ? &exceptionInfo : 0, 0, NULL);
+		MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, mdt, (e != 0) ? &exceptionInfo : 0, 0, NULL);
 
 		if (hFile)
 		{
@@ -66,7 +67,7 @@ LONG WINAPI ExceptionFilter(EXCEPTION_POINTERS* exceptionInfo)
 
 	CFixedString<64> timeStamp;
 	timeStamp.MakeDateTime(_T('-'), _T(' '), _T('-'));
-	tofstream writeFile(Generic::FormatSafe(_T("%a ServerException.txt"), timeStamp.Get()), std::ofstream::out);
+	tofstream writeFile(Generic::FormatSafe(_T("%a ExceptionLog.txt"), timeStamp.Get()), std::ofstream::out);
 
 	if (writeFile.is_open())
 	{
