@@ -83,9 +83,18 @@ namespace ClientNetwork
             {
                 System.Buffer.BlockCopy(m_Array, m_offset, arr, 0, len);
                 m_offset += len;
+                read = len;
             }
 
             return read;
+        }
+
+        public void Skip(int len)
+        {
+            if (m_offset + len <= m_MaxSize)
+            {
+                m_offset += len;
+            }
         }
 
     }
@@ -121,6 +130,12 @@ namespace ClientNetwork
             return written;
         }
 
+        public void WritePacketSize(short size)
+        {
+            // packet Id 다음에 사이즈를 복사 시킴
+            BitConverter.GetBytes(size).CopyTo(m_Array, sizeof(short));
+        }
+
         public int WriteArray<T>(T[] array, int len)
         {
             int written = 0;
@@ -129,6 +144,7 @@ namespace ClientNetwork
             {
                 System.Buffer.BlockCopy(array, 0, m_Array, m_offset, len);
                 m_offset += len;
+                written = len;
             }
 
             return written;
@@ -139,6 +155,7 @@ namespace ClientNetwork
             int written = 0;
             BitConverter.GetBytes(data).CopyTo(m_Array, m_offset);
             m_offset += sizeof(int);
+            written = sizeof(int);
             return written;
         }
 
@@ -147,6 +164,7 @@ namespace ClientNetwork
             int written = 0;
             BitConverter.GetBytes(data).CopyTo(m_Array, m_offset);
             m_offset += sizeof(short);
+            written = sizeof(short);
             return written;
         }
 
@@ -158,7 +176,7 @@ namespace ClientNetwork
 
         int Write(CWriteBuffer buffer);
 
-        int GetId();
+        short GetId();
     }
 
     struct CString : IPacket
@@ -181,7 +199,7 @@ namespace ClientNetwork
             return new string(arr);
         }
 
-        public int GetId() { return -1; }
+        public short GetId() { return -1; }
 
         public int Read(CReadBuffer buf)
         {
@@ -192,12 +210,7 @@ namespace ClientNetwork
 
             // 사이즈 할당
             arr = new char[size];
-
             read += buf.ReadArray(arr, sizeof(char) * size);
-
-            // c++과 호환을 위해 null 문자열
-            char temp = ' ';
-            read += buf.Read(ref temp);
 
             return read;
         }
@@ -210,8 +223,6 @@ namespace ClientNetwork
             written += buf.Write(size);
             written += buf.WriteArray(arr, sizeof(char) * size);
 
-            // c++과 호환을 위해 null 문자열
-            written += buf.Write((char)0);
             return written;
         }
     }
@@ -229,7 +240,7 @@ namespace ClientNetwork
             count = 0;
         }
 
-        public int GetId() { return -1; }
+        public short GetId() { return -1; }
 
         public void Append(ref T value)
         {

@@ -64,10 +64,18 @@ namespace ClientNetwork
 
         public void Send(IPacket packet)
         {
+            short tag = 1;
+            short test = 0;
             byte[] buf = new byte[100];
             CWriteBuffer writeBuf = new CWriteBuffer(buf, 100);
-            int written = packet.Write(writeBuf);
-            m_Marshaller.Marshall(buf, written - CPacketBase.HeaderLength);
+
+            int written = writeBuf.Write(packet.GetId());
+            written += writeBuf.Write(test);
+            written += writeBuf.Write(tag);
+            written += packet.Write(writeBuf);
+            writeBuf.WritePacketSize((short)written);
+
+            m_Marshaller.Marshall(buf, CPacketBase.HeaderLength, written - CPacketBase.HeaderLength);
             m_SendBuffer.Write(buf, written);
         }
 

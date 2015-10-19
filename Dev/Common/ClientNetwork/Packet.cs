@@ -12,7 +12,7 @@ namespace ClientNetwork
     {
         public CString m_Str;
 
-        public int GetId() { return 0; }
+        public short GetId() { return 0; }
 
         public int Read(CReadBuffer buffer)
         {
