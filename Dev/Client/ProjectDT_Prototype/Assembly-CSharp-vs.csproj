@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
      <Compile Include="Assets\Scripts\Manager\Log.cs" />
      <Compile Include="Assets\Scripts\Manager\PathManager.cs" />
+     <Compile Include="Assets\Scripts\Manager\TextureAnimation.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitBase.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitStat.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitState\AttackState.cs" />

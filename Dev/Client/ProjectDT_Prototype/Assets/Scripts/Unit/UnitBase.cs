@@ -92,12 +92,12 @@ public class UnitBase : MonoBehaviour {
         if(mPathInfo.pathDirection == ePathDirection.Forward)
         {
             mCamp = ePlayerCamp.Left;
-            transform.Rotate(Vector3.up, 180.0f);
+            transform.Rotate(Vector3.up, 0.0f);
         }
         else
         {
             mCamp = ePlayerCamp.Right;
-            transform.Rotate(Vector3.up, 0.0f);
+            transform.Rotate(Vector3.up, 180.0f);
         }
 
         //. 시작 포지션 설정
