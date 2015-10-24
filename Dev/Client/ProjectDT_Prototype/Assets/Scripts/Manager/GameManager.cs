@@ -112,6 +112,12 @@ public class GameManager : MonoBehaviour {
         mRightCamp = new UnitCampData();
         mTempOId = 1;
 	}
+
+    NetworkView GetNetworkView()
+    {
+        // deprecated!!! Unity 5.0
+        return GetComponent<NetworkView>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -121,13 +127,33 @@ public class GameManager : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                CreateUnit(1, new PathInfo(ePathType.Upper, ePathDirection.Forward));
-                CreateUnit(2, new PathInfo(ePathType.Upper, ePathDirection.Reverse));
+                NetworkView network = GetNetworkView();
+                if (NetworkManager.instance.isServer)
+                {
+                    network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                }
+                else
+                {
+                    network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
+                }
+
+                //CreateUnit(1, new PathInfo(ePathType.Upper, ePathDirection.Forward));
+                //CreateUnit(2, new PathInfo(ePathType.Upper, ePathDirection.Reverse));
             }
             else if(Input.GetKey(KeyCode.DownArrow))
             {
-                CreateUnit(1, new PathInfo(ePathType.Lower, ePathDirection.Forward));
-                CreateUnit(2, new PathInfo(ePathType.Lower, ePathDirection.Reverse));
+                NetworkView network = GetNetworkView();
+                if (NetworkManager.instance.isServer)
+                {
+                    network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                }
+                else
+                {
+                    network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
+                }                           
+
+                //CreateUnit(1, new PathInfo(ePathType.Lower, ePathDirection.Forward));
+                //CreateUnit(2, new PathInfo(ePathType.Lower, ePathDirection.Reverse));
             }
             else if(Input.GetKey(KeyCode.A))
             {
@@ -206,10 +232,12 @@ public class GameManager : MonoBehaviour {
     /// <summary>
     /// 유닛 만들기
     /// </summary>
-    public void CreateUnit(int _unitClassID, PathInfo _pathInfo)
+
+    [RPC]
+    public void CreateUnit(int _unitClassID, int _pathType, int _pathDirection)
     {
         //. Todo 유닛 목록에서 classID 맞는 스탯 정보 Get
-
+        
         //. 임시 테스트 데이터
         PathInfo unitpath = null;
         GameObject template = null;
@@ -217,13 +245,13 @@ public class GameManager : MonoBehaviour {
         if( _unitClassID == 1 )
         {
             template = testUnit1;
-            unitpath = _pathInfo;
+            unitpath = new PathInfo((ePathType)_pathType, (ePathDirection)_pathDirection);
         }
 		//테스트용 원거리유닛
         else
         {
             template = testUnit2;
-            unitpath = _pathInfo;
+            unitpath = new PathInfo((ePathType)_pathType, (ePathDirection)_pathDirection);
         }
 
 		//유닛 생성
