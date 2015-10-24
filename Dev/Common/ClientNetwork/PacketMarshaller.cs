@@ -8,16 +8,15 @@ namespace ClientNetwork
 {
     class CPacketMarshaller
     {
+        /// <summary>
+        /// 패킷 헤더 크기만큼 왔는지 검사하고 실행된 함수
+        /// </summary>
         public int UnMarshall(CClientPeer peer, byte[] buf, int total)
         {
             int handled = 0;
 
             do
             {
-                // 헤더 넘게 왔나?
-                if (total < CPacketBase.HeaderLength)
-                    break;
-
                 // 패킷 Id
                 short id = 0;
                 unsafe

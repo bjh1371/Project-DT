@@ -11,7 +11,7 @@ namespace ClientNetwork
         public int Execute(CClientPeer peer, byte[] buf, int total)
         {
             CReadBuffer readBuf = new CReadBuffer(buf, total);
-            buf.Skip(CPacketBase.HeaderFullLength);
+            buf.Skip((int)PacketHeader.PACKET_HEADER_FULL_LENGTH);
 
             PingPacket ping = new PingPacket();
             int read = ping.Read(readBuf);

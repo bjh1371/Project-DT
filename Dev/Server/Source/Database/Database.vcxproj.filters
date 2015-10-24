@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="!Don%27t Care">
+      <UniqueIdentifier>{64437d00-9088-4e81-b446-cd03e23e74f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Couchbase">
+      <UniqueIdentifier>{de4402ac-ad09-4bc7-8e70-1b53349d6c91}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DatabasePCH.h">
+      <Filter>!Don%27t Care</Filter>
+    </ClInclude>
+    <ClInclude Include="Couchbase.h">
+      <Filter>Couchbase</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DatabasePCH.cpp">
+      <Filter>!Don%27t Care</Filter>
+    </ClCompile>
+    <ClCompile Include="Couchbase.cpp">
+      <Filter>Couchbase</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

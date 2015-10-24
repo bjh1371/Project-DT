@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Intermediate\Lib\$(Configuration)\;..\..\..\..\Lib\Server\tbb42_20140601oss\lib\intel64\vc12;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Intermediate\Lib\$(Configuration)\;..\..\..\..\Lib\Server\yaml-cpp-0.5.1\lib;..\..\..\..\Lib\Server\libcouchbase-2.5.3\lib;..\..\..\..\Lib\Server\tbb42_20140601oss\lib\intel64\vc12;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>

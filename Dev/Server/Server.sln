@@ -22,6 +22,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XEchoServer", "Source\XEcho
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Packet", "..\Common\Packet\Packet.vcxproj", "{BBD964E5-3EC4-4171-8810-3248B8756EF4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Database", "Source\Database\Database.vcxproj", "{DAB1F973-29A1-4620-B77D-1A63E9621D36}"
+	ProjectSection(ProjectDependencies) = postProject
+		{95B905EE-F5BD-415A-B3F5-ABD6D18EE2BF} = {95B905EE-F5BD-415A-B3F5-ABD6D18EE2BF}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -48,6 +53,10 @@ Global
 		{BBD964E5-3EC4-4171-8810-3248B8756EF4}.Debug|x64.Build.0 = Debug|x64
 		{BBD964E5-3EC4-4171-8810-3248B8756EF4}.Release|x64.ActiveCfg = Release|x64
 		{BBD964E5-3EC4-4171-8810-3248B8756EF4}.Release|x64.Build.0 = Release|x64
+		{DAB1F973-29A1-4620-B77D-1A63E9621D36}.Debug|x64.ActiveCfg = Debug|x64
+		{DAB1F973-29A1-4620-B77D-1A63E9621D36}.Debug|x64.Build.0 = Debug|x64
+		{DAB1F973-29A1-4620-B77D-1A63E9621D36}.Release|x64.ActiveCfg = Release|x64
+		{DAB1F973-29A1-4620-B77D-1A63E9621D36}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

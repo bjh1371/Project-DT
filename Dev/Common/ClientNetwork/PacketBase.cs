@@ -7,23 +7,12 @@ using System.Runtime.InteropServices;
 
 namespace ClientNetwork
 {
-   class CPacketBase
+   enum PacketHeader
    {
-       private static int PACKET_HEADER_LENGTH = sizeof(short) + sizeof(short);
-       private static int PACKET_HEADER_FULL_LENGTH = sizeof(short) + sizeof(short) + sizeof(short);
-
-       public static int HeaderLength
-       {
-           get { return PACKET_HEADER_LENGTH; }
-       }
-
-       public static int HeaderFullLength
-       {
-           get { return PACKET_HEADER_FULL_LENGTH; }
-       }
-
+       PACKET_HEADER_LENGTH = sizeof(short) + sizeof(short),                     ///< id + size
+       PACKET_HEADER_FULL_LENGTH = sizeof(short) + sizeof(short) + sizeof(short) ///< id + size + checksum
    }
-    
+
     class CReadBuffer
     {
         private byte[] m_Array;

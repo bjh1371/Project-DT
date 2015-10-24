@@ -14,7 +14,7 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>..\..\..\..\Lib\Server\tbb42_20140601oss\include;..\;..\..\..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\Lib\Server\yaml-cpp-0.5.1\include;..\..\..\..\Lib\Server\json;..\..\..\..\Lib\Server\libcouchbase-2.5.3\include;..\..\..\..\Lib\Server\tbb42_20140601oss\include;..\;..\..\..\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

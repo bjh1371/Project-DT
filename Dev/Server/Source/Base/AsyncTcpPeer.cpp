@@ -85,6 +85,11 @@ void CAsyncTcpPeer::PostSend(CAsyncTcpEvent* evt)
 
 	if (IsConnected())
 	{
+		if (m_Marshaller)
+		{
+			m_Marshaller->Marshall(evt->m_Buf, evt->m_TotalBytes);
+		}
+		
 		if (CWrapperEvent* wrapper = xnew(CWrapperEvent, evt, InterlockedIncrement64(&m_SendSequence)))
 		{
 			SendState state = IDLE;
@@ -92,9 +97,13 @@ void CAsyncTcpPeer::PostSend(CAsyncTcpEvent* evt)
 			{
 				int written = FlushSendQueue(wrapper);
 
-				if (written == 0)
+				// 접속 중이라면 최소 방금 패킷은 보내야된다.
+				if (IsConnected())
 				{
-					assert(false && "flush error");
+					if (written == 0)
+					{
+						assert(false && "flush error");
+					}
 				}
 			}
 			else if (state == SEND)

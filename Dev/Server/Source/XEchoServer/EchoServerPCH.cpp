@@ -12,7 +12,11 @@
 
 #ifdef _DEBUG
 #pragma comment(lib, "tbb_debug")
+#pragma comment(lib, "libyaml-cppmdd")
+#pragma comment(lib, "libcouchbase_d")
 #else
 #pragma comment(lib, "tbb")
+#pragma comment(lib, "libyaml-cppmd")
+#pragma comment(lib, "libcouchbase")
 #endif
 

@@ -40,7 +40,7 @@ namespace ClientNetwork
         public void Execute()
         {
             int handled = 0;
-            while (m_RecvBuffer.GetLength() > CPacketBase.HeaderFullLength)
+            while (m_RecvBuffer.GetLength() > (int)PacketHeader.PACKET_HEADER_FULL_LENGTH)
             {
                 int result = m_Marshaller.UnMarshall(this, m_RecvBuffer.GetStream(), m_RecvBuffer.GetLength());
                 if (result == 0)
@@ -75,7 +75,7 @@ namespace ClientNetwork
             written += packet.Write(writeBuf);
             writeBuf.WritePacketSize((short)written);
 
-            m_Marshaller.Marshall(buf, CPacketBase.HeaderLength, written - CPacketBase.HeaderLength);
+            m_Marshaller.Marshall(buf, (int)PacketHeader.PACKET_HEADER_LENGTH, written - (int)PacketHeader.PACKET_HEADER_LENGTH);
             m_SendBuffer.Write(buf, written);
         }
 
