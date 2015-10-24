@@ -22,9 +22,12 @@ public class LogEditor : Editor
             return;
 
         // 체크 박스 생성.
-        for (int i = 0; i < (int)eLogFilter.Max; ++i)
-            Log.Instance.mFilters[i] = EditorGUILayout.Toggle(mEnumNames[i], Log.Instance.mFilters[i]);
-
+        foreach(eLogFilter value in Enum.GetValues(typeof(eLogFilter)))
+        {
+            int i = (int)value;
+            Log.Instance.mFilters[i] = EditorGUILayout.Toggle(mEnumNames[i], Log.Instance.mFilters[i]);            
+        }
+            
         // GUI 변경 되었으면 타겟을 다시 렌더링하도록 dirty 마크.
         if (GUI.changed)
             EditorUtility.SetDirty(target);

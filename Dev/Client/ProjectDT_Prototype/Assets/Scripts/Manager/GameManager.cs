@@ -35,10 +35,8 @@ public class UnitLaneData
     /// </summary>
     /// <param name="_unit">기준 유닛</param>
     /// <param name="_dampingFactor">범위 감쇠값 (다른 라인 유닛을 검색할때 사용)</param>
-    public UnitBase GetCloseAttackTarget(UnitBase _unit, float _dampingFactor)
+    public UnitBase GetCloseAttackTarget(UnitBase _unit, float _dampingFactor = 1.0f)
     {
-		if (_dampingFactor == null)
-			_dampingFactor = 1.0f;
         //. 검사 범위 계산 min - max 
         Vector3 callerPos = _unit.transform.position;
         int searchDirection = (_unit.mCamp == ePlayerCamp.Right) ? -1 : 1;  //. Right면 오른쪽에서 왼쪽으로 검사
@@ -133,7 +131,7 @@ public class GameManager : MonoBehaviour {
             }
             else if(Input.GetKey(KeyCode.A))
             {
-                GameObject proj = Instantiate(projectileTest);
+                Instantiate(projectileTest, new Vector3(-12.0f, -5.0f, 0.0f), Quaternion.identity);
             }
            
         }
@@ -152,7 +150,7 @@ public class GameManager : MonoBehaviour {
 
         if (campData == null)
         {
-            Log.PrintLog(eLogFilter.GameManager, "Unexpected parameter (_camp)");
+            Log.Print(eLogFilter.GameManager, "Unexpected parameter (_camp)");
             return null;
         }
 
@@ -179,7 +177,7 @@ public class GameManager : MonoBehaviour {
     public void OnCreateUnitNotify(UnitBase _unit)
     {
         string log = string.Format("OnCreateUnit camp({0}), pathType({1})", _unit.mCamp, _unit.mPathInfo.pathType);
-        Log.PrintLog(eLogFilter.GameManager, log);
+        Log.Print(eLogFilter.GameManager, log);
         UnitLaneData unitLane = GetUnitLane(_unit.mCamp, _unit.mPathInfo.pathType);
 
         //. Dict에 추가
@@ -197,7 +195,7 @@ public class GameManager : MonoBehaviour {
     public void OnDeadUnitNotify(UnitBase _unit)
     {
         string log  = string.Format("OnDestroyUnit camp({0}), pathType({1})", _unit.mCamp, _unit.mPathInfo.pathType);
-        Log.PrintLog(eLogFilter.GameManager, log);
+        Log.Print(eLogFilter.GameManager, log);
         UnitLaneData unitLane = GetUnitLane(_unit.mCamp, _unit.mPathInfo.pathType);
 
         //. Dict 에서 제거

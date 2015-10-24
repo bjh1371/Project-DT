@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 /// <summary>
 /// 로그 필터
 /// </summary>
-public enum eLogFilter
+public enum eLogFilter : int
 {
     Normal,                /// 일반 로그
     GameManager,           /// 게임 매니져
     PathManager,           /// 패스 매니져
-    Max,
+    Projectile,            /// 발사체                       
 }   
 
 /// <summary>
@@ -19,12 +20,15 @@ public enum eLogFilter
 /// </summary>
 public class Log : MonoBehaviour {
     public static Log Instance;
-    public bool[] mFilters = new bool[(int)eLogFilter.Max];
+    public bool[] mFilters;
 
     void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            mFilters = new bool[Enum.GetValues(typeof(eLogFilter)).Length];
+        }
         else
             Debug.LogError("Log has two instances");
     }
@@ -37,11 +41,16 @@ public class Log : MonoBehaviour {
         Debug.LogError(_filter.ToString() + " " + _message);
     }
 
-    public static void PrintLog(eLogFilter _filter, object _message)
+    public static void Print(eLogFilter _filter, object _message)
     {
         if (Instance.mFilters[(int)_filter] == false)
             return;
 
         Debug.Log(_filter.ToString() + " " + _message);
+    }
+
+    public static void Print(object _message)
+    {
+        Print(eLogFilter.Normal, _message);
     }
 }

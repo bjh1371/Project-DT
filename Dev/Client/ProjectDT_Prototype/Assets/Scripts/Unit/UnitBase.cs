@@ -20,6 +20,9 @@ public class UnitBase : MonoBehaviour {
     public UnitState mState { get; protected set; }     /// 유닛 상태
                                                          
     private Rigidbody2D mRigidBody;                     /// 유닛 이동을 위한 객체
+    
+    public GameObject mProjectileObj;                   /// 발사체 오브젝트 ( 레인지 유닛일때 사용 )
+    public Transform mFirePosition;                     /// 발사 위치
 
     void Awake()
     {
@@ -39,6 +42,10 @@ public class UnitBase : MonoBehaviour {
             mState.Update();
 	}
 
+    void FixedUpdate()
+    {
+    }
+
     void LateUpdate()
     {
         if (mState != null)
@@ -47,7 +54,7 @@ public class UnitBase : MonoBehaviour {
 
     void OnDrawGizmos()
     {
-        if (mState.GetCode() == eUnitState.Attack)
+        if (mState != null && mState.GetCode() == eUnitState.Attack)
         {
             AttackState attackState = mState as AttackState;
             UnitBase targetUnit = GameManager.Instance.FindUnit(attackState.mTargetUnitInfo);
@@ -64,7 +71,7 @@ public class UnitBase : MonoBehaviour {
     /// </summary>
     public void BeginDestroy()
     {
-        Log.PrintLog(eLogFilter.Normal, string.Format("unit is dead({0})", mOId));
+        Log.Print(eLogFilter.Normal, string.Format("unit is dead({0})", mOId));
         CancelInvoke();
         Destroy(gameObject);
     }
@@ -118,7 +125,7 @@ public class UnitBase : MonoBehaviour {
         //. 데미지 계산
         float damageValue = _info.mDamage - mStat.mDefence;
         mStat.mHP -= damageValue;
-        Log.PrintLog(eLogFilter.Normal, string.Format(@"unit is attacked oId:{0} hp:{1} defence:{2} damageInfo{3}", mOId, mStat.mHP, mStat.mDefence, _info.mDamage));
+        Log.Print(eLogFilter.Normal, string.Format(@"unit is attacked oId:{0} hp:{1} defence:{2} damageInfo{3}", mOId, mStat.mHP, mStat.mDefence, _info.mDamage));
 
         //. 피격 이펙트 재생
 
@@ -159,9 +166,9 @@ public class UnitBase : MonoBehaviour {
         switch(_eUnitState)
         {
             case eUnitState.Attack: return new AttackState(this);
-            case eUnitState.Dead:   return new DeadState(this);
-            case eUnitState.Idle:   return new IdleState(this);
-            case eUnitState.Move:   return new MoveState(this);
+            case eUnitState.Dead: return new DeadState(this);
+            case eUnitState.Idle: return new IdleState(this);
+            case eUnitState.Move: return new MoveState(this);
         }
 
         Log.PrintError(eLogFilter.Normal, "invalid parameter (CreateUnitState)");
@@ -183,7 +190,7 @@ public class UnitBase : MonoBehaviour {
     /// </summary>
     public void StartMove()
     {
-        mRigidBody.velocity = mStat.mMoveSpeed * mPathInfo.moveDirection;
+        mRigidBody.velocity = mStat.mMoveSpeed * Time.deltaTime * mPathInfo.moveDirection;
     }
 
     /// <summary>
@@ -192,6 +199,16 @@ public class UnitBase : MonoBehaviour {
     public void StopMove()
     {
         mRigidBody.velocity = Vector2.zero;
+    }
+
+    /// <summary>
+    /// 데미지 정보 반환 (나중에 버프 같은것도 여기서 계산)
+    /// </summary>
+    public DamageInfo GetDamangeInfo()
+    {
+        DamageInfo damageInfo = new DamageInfo();
+        damageInfo.mDamage = mStat.mAttackPower;
+        return damageInfo;
     }
 
     public bool IsDead()
