@@ -128,38 +128,47 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 NetworkView network = GetNetworkView();
-                if (NetworkManager.instance.isServer)
+                if(network != null)
                 {
-                    network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                    if (NetworkManager.instance.isServer)
+                    {
+                        network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                    }
+                    else
+                    {
+                        network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
+                    }
                 }
                 else
                 {
-                    network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
+                    CreateUnit(1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                    CreateUnit(2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
                 }
-
-                //CreateUnit(1, new PathInfo(ePathType.Upper, ePathDirection.Forward));
-                //CreateUnit(2, new PathInfo(ePathType.Upper, ePathDirection.Reverse));
             }
             else if(Input.GetKey(KeyCode.DownArrow))
             {
                 NetworkView network = GetNetworkView();
-                if (NetworkManager.instance.isServer)
+                if (network != null)
                 {
-                    network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                    if (NetworkManager.instance.isServer)
+                    {
+                        network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Lower, (int)ePathDirection.Forward);
+                    }
+                    else
+                    {
+                        network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Lower, (int)ePathDirection.Reverse);
+                    }
                 }
                 else
                 {
-                    network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
-                }                           
-
-                //CreateUnit(1, new PathInfo(ePathType.Lower, ePathDirection.Forward));
-                //CreateUnit(2, new PathInfo(ePathType.Lower, ePathDirection.Reverse));
+                    CreateUnit(1, (int)ePathType.Lower, (int)ePathDirection.Forward);
+                    CreateUnit(2, (int)ePathType.Lower, (int)ePathDirection.Reverse);
+                }
             }
             else if(Input.GetKey(KeyCode.A))
             {
                 Instantiate(projectileTest, new Vector3(-12.0f, -5.0f, 0.0f), Quaternion.identity);
-            }
-           
+            } 
         }
 	}
 
