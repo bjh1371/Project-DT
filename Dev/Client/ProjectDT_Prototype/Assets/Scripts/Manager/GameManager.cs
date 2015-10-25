@@ -132,11 +132,13 @@ public class GameManager : MonoBehaviour {
                 {
                     if (NetworkManager.instance.isServer)
                     {
-                        network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
+                        // 여기 에러남 확인좀 해주셈
+                        //network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Upper, (int)ePathDirection.Forward);
                     }
                     else
                     {
-                        network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
+                        // 여기 에러남 확인좀 해주셈
+                        // network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Upper, (int)ePathDirection.Reverse);
                     }
                 }
                 else
@@ -152,11 +154,13 @@ public class GameManager : MonoBehaviour {
                 {
                     if (NetworkManager.instance.isServer)
                     {
-                        network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Lower, (int)ePathDirection.Forward);
+                        // 여기 에러남 확인좀 해주셈
+                        // network.RPC("CreateUnit", RPCMode.AllBuffered, 1, (int)ePathType.Lower, (int)ePathDirection.Forward);
                     }
                     else
                     {
-                        network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Lower, (int)ePathDirection.Reverse);
+                        // 여기 에러남 확인좀 해주셈
+                        // network.RPC("CreateUnit", RPCMode.AllBuffered, 2, (int)ePathType.Lower, (int)ePathDirection.Reverse);
                     }
                 }
                 else
@@ -242,7 +246,7 @@ public class GameManager : MonoBehaviour {
     /// 유닛 만들기
     /// </summary>
 
-    [RPC]
+    //[RPC]
     public void CreateUnit(int _unitClassID, int _pathType, int _pathDirection)
     {
         //. Todo 유닛 목록에서 classID 맞는 스탯 정보 Get
