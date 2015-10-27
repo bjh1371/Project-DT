@@ -31,6 +31,8 @@ public class ProjectileBase : MonoBehaviour {
         //. Angle Offset 보정
         mAngleOffset = Mathf.Clamp(mAngleOffset, 0.0f, 0.5f);
 
+        transform.rotation = Quaternion.Euler(0, 0, -90 * mAngleOffset);
+
         //. 타겟 방향 벡터 구하기
         mToTargetDirection = ((mTargetPosition - mOwnerPosition)* 100).normalized;
 
