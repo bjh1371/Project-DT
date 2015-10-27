@@ -83,7 +83,10 @@ public class AttackState : UnitState{
         //. 타겟 유닛 서치, 중간에 죽었을수도 있으니깐~
         UnitBase targetUnit = GameManager.Instance.FindUnit(mTargetUnitInfo);
         if (targetUnit == null)
+        {
+            GameObject.Destroy(projectileObj);
             return;
+        }
 
         //. 타겟 정보 셋팅
         projectileBase.mTargetUnit = targetUnit;

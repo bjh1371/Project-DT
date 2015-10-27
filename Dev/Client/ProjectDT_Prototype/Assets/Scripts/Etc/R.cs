@@ -45,6 +45,6 @@ public class R
 
         public static ushort INVALID_OBJECT_ID = 0;
 
-        public static float PROJECTILE_DESTORY_DELAY_TIME = 0.5f;   /// 발사체가 충돌없이 도달했을 때, 얼마후에 Destory할것인가(second) 
+        public static float PROJECTILE_DESTORY_DELAY_TIME = 0.1f;   /// 발사체가 충돌없이 도달했을 때, 얼마후에 Destory할것인가(second) 
     }
 }
