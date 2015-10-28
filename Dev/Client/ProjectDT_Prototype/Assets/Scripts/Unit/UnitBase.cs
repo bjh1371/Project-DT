@@ -20,9 +20,10 @@ public class UnitBase : MonoBehaviour {
     public UnitState mState { get; protected set; }     /// 유닛 상태
                                                          
     private Rigidbody2D mRigidBody;                     /// 유닛 이동을 위한 객체
-    
+
     public GameObject mProjectileObj;                   /// 발사체 오브젝트 ( 레인지 유닛일때 사용 )
-    public Transform mFirePosition;                     /// 발사 위치
+    public Transform mFirePosition;                     /// 발사 위치  ( 레인지 유닛일때 사용 )
+    public Transform mHitPosition;                      /// 투사체가 박히는 위치
 
     void Awake()
     {

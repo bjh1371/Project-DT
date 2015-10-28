@@ -24,9 +24,9 @@ public class ProjectileBase : MonoBehaviour {
     private Vector3 mToTargetDirection;         /// 타겟 으로 향하는 벡터
     void Start()
     {
-        //. 위치값 초기화
-        mOwnerPosition = mOwnerUnit.gameObject.transform.position;
-        mTargetPosition = mTargetUnit.gameObject.transform.position;
+        //. 위치값 초기화                
+        mOwnerPosition = mOwnerUnit.mFirePosition.position;
+        mTargetPosition = mTargetUnit.mHitPosition.position;
 
         //. Angle Offset 보정
         mAngleOffset = Mathf.Clamp(mAngleOffset, 0.0f, 0.5f);

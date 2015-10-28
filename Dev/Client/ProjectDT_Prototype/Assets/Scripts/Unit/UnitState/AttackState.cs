@@ -65,17 +65,15 @@ public class AttackState : UnitState{
     ///  활, 총알 발사 애니메이션 이벤트
     /// </summary>
     public virtual void OnAnimationEvent_Fire()
-    {
+    {        
         if (mParent.mProjectileObj == null)
             return;
 
         //. 발사체 생성
         GameObject projectileObj = Object.Instantiate(mParent.mProjectileObj);
-        if (projectileObj == null)
-            return;
-
         projectileObj.transform.position = mParent.mFirePosition.position;
         projectileObj.transform.rotation = mParent.mFirePosition.rotation;
+        
         ProjectileBase projectileBase = projectileObj.GetComponent<ProjectileBase>();
         if (projectileBase == null)
             return;
